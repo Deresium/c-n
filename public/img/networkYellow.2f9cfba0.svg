@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="63" height="66" viewBox="0 0 63 66">
+  <g id="Group_3" transform="translate(-240 -240)">
+    <g id="Ellipse_1" transform="translate(280 240)" fill="#FEFE00" stroke="#FEFE00" stroke-width="1">
+      <circle cx="11.5" cy="11.5" r="11.5" stroke="none"/>
+      <circle cx="11.5" cy="11.5" r="11" fill="none"/>
+    </g>
+    <g id="Ellipse_2" transform="translate(240 262)" fill="#FEFE00" stroke="#FEFE00" stroke-width="1">
+      <circle cx="11.5" cy="11.5" r="11.5" stroke="none"/>
+      <circle cx="11.5" cy="11.5" r="11" fill="none"/>
+    </g>
+    <g id="Ellipse_3" transform="translate(280 283)" fill="#FEFE00" stroke="#FEFE00" stroke-width="1">
+      <circle cx="11.5" cy="11.5" r="11.5" stroke="none"/>
+      <circle cx="11.5" cy="11.5" r="11" fill="none"/>
+    </g>
+    <line id="Line_1"  x1="21" y2="12" transform="translate(261 256)" fill="none" stroke="#FEFE00" stroke-width="1"/>
+    <line id="Line_2" x2="20" y2="11" transform="translate(261.5 278.5)" fill="none" stroke="#FEFE00" stroke-width="1"/>
+  </g>
+</svg>

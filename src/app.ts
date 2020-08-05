@@ -1,15 +1,27 @@
 import express from "express";
 import path from "path";
+import redirectHttps from "./middlewares/redirectHttps";
+import {connect} from "./mongodb";
+import returnIndex from "./middlewares/returnIndex";
+import routerCn from "./routers/CnRouter";
+import allowLocalhost from "./middlewares/allowLocalhost";
+
+connect();
 
 const app = express();
 const publicDirectoryPath = path.join(__dirname, '../public');
 
-// redirect https if production
-// returnIndex
+if(process.env.NODE_ENV === 'production') {
+    app.use(redirectHttps);
+}
+else{
+    app.use(allowLocalhost);
+}
+
+app.use(returnIndex);
 
 app.use(express.json());
-
-// routers
+app.use(routerCn);
 
 app.use(express.static(publicDirectoryPath));
 
