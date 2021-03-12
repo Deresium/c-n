@@ -29,6 +29,7 @@
     "@types/mongodb": "^3.5.25",
     "@types/mongoose": "^5.7.34",
     "env-cmd": "^10.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "typescript": "^4.2.3"
   }
 }
