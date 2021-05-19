@@ -10,6 +10,7 @@ const mongodb_1 = require("./mongodb");
 const returnIndex_1 = __importDefault(require("./middlewares/returnIndex"));
 const CnRouter_1 = __importDefault(require("./routers/CnRouter"));
 const allowLocalhost_1 = __importDefault(require("./middlewares/allowLocalhost"));
+const forceDownloadPDF_1 = __importDefault(require("./middlewares/forceDownloadPDF"));
 mongodb_1.connect();
 const app = express_1.default();
 const publicDirectoryPath = path_1.default.join(__dirname, '../public');
@@ -19,8 +20,9 @@ if (process.env.NODE_ENV === 'production') {
 else {
     app.use(allowLocalhost_1.default);
 }
+app.use(forceDownloadPDF_1.default);
+app.use(express_1.default.static(publicDirectoryPath));
 app.use(returnIndex_1.default);
 app.use(express_1.default.json());
 app.use(CnRouter_1.default);
-app.use(express_1.default.static(publicDirectoryPath));
 exports.default = app;

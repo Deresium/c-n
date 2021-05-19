@@ -5,6 +5,7 @@ import {connect} from "./mongodb";
 import returnIndex from "./middlewares/returnIndex";
 import routerCn from "./routers/CnRouter";
 import allowLocalhost from "./middlewares/allowLocalhost";
+import forceDownloadPDF from "./middlewares/forceDownloadPDF";
 
 connect();
 
@@ -18,11 +19,13 @@ else{
     app.use(allowLocalhost);
 }
 
+app.use(forceDownloadPDF);
+
+
+app.use(express.static(publicDirectoryPath));
 app.use(returnIndex);
 
 app.use(express.json());
 app.use(routerCn);
-
-app.use(express.static(publicDirectoryPath));
 
 export default app;
