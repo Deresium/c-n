@@ -7,6 +7,7 @@
 <script src="axios.min.js"></script>
 <script>
     const params = new URLSearchParams(window.location.search);
+    const nbiIP = params.get('nbiIP');
     const sip = params.get('sip');
     const url = params.get('url');
     const proxy = params.get('proxy');
@@ -19,7 +20,7 @@
     console.log('uip', uip);
     console.log('clientMac', clientMac);
 
-    const urlRuckus = `https://${apIP}:9998/SubscriberPortal/hotspotlogin`
+    const urlRuckus = `https://${nbiIP}:9998/SubscriberPortal/hotspotlogin`
     axios.post(urlRuckus,{
         url,
         proxy,
