@@ -22,6 +22,10 @@
 
     const urlRuckus = `http://86.39.72.7:9997/SubscriberPortal/hotspotlogin`
     axios.post(urlRuckus,{
+        url,
+        proxy,
+        uip,
+        client_mac: clientMac,
         username: 'hotspot',
         password: 'abcd1234'
     }).then(() => {
