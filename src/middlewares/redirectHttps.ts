@@ -1,7 +1,7 @@
 import {RequestHandler} from "express";
 
 const redirectHttps: RequestHandler = (req, res, next) => {
-    if(req.headers.accept?.includes('text/html') && req.headers.host?.includes('captiveportal')){
+    if(req.headers.host?.startsWith('captiveportal.')){
         next();
     }
     else if (req.header('x-forwarded-proto') !== 'https')
