@@ -20,7 +20,7 @@
     console.log('uip', uip);
     console.log('clientMac', clientMac);
 
-    const urlRuckus = `http://${nbiIP}:9997/SubscriberPortal/hotspotlogin`
+    const urlRuckus = `http://${apIP}:9997/SubscriberPortal/hotspotlogin`
     axios.post(urlRuckus,{
         url,
         proxy,
