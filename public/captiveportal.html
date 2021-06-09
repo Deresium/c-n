@@ -7,9 +7,45 @@
             var wifi4euTimerStart = Date.now();
             var wifi4euNetworkIdentifier = 'wIpyJ01C2AeQZfneKOCuz';
             var wifi4euLanguage = 'fr';
-            var selftestModus = true;
         </script>
         <script type="text/javascript" src="https://collection.wifi4eu.ec.europa.eu/wifi4eu.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;display=swap" rel="stylesheet">
+        <style>
+            @font-face {
+                font-family: 'Ace Sans';
+                font-style: auto;
+                font-weight: auto;
+                src: url('Ace Sans.otf');
+            }
+
+            h1{
+                font-family: Ace Sans, sans-serif;
+                text-align: center;
+                color: #2e3092
+            }
+
+            p{
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .cableNetworkPowered{
+                margin-top: 20px;
+                display: flex;
+                align-items: center;
+            }
+
+            .cableNetworkPowered a{
+                color: #2e3092;
+            }
+
+            .logoCN{
+                width: 100px;
+                object-fit: fill;
+                height: auto;
+                margin-right: 10px;
+            }
+
+        </style>
     </head>
 <!--<script src="axios.min.js"></script>-->
 
@@ -50,7 +86,13 @@
 </script>-->
 
     <body>
-        <h1>Captive Portal</h1>
+        <h1>Bienvenue sur le portail captif WiFi4EU</h1>
         <img id="wifi4eubanner"/>
+        <div class="cableNetworkPowered">
+            <img class="logoCN" src="logoCN.png" alt="logo C&N"/>
+            <p>
+                Powered by Cable & Network - <a href="https://www.c-n.be">www.c-n.be</a>
+            </p>
+        </div>
     </body>
 </html>
