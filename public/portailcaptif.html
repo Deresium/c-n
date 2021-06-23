@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Captive portal c-n</title>
+    <script src="axios.min.js"></script>
+    <script type="text/javascript">
+        var wifi4euTimerStart = Date.now();
+        var wifi4euNetworkIdentifier = 'wIpyJ01C2AeQZfneKOCuz';
+        var wifi4euLanguage = 'fr';
+
+        const params = new URLSearchParams(window.location.search);
+        const sip = params.get('sip');
+        const sshTunnelStatus = parseInt(params.get('sshTunnelStatus'));
+        const apIP = params.get('apip');
+
+        const proxy = params.get('proxy');
+        const uip = params.get('uip');
+        const clientMac = params.get('client_mac');
+        const url = params.get('url');
+
+        let urlToCall;
+        if (sshTunnelStatus)
+            urlToCall = `https://${sip}:9998/SubscriberPortal/hotspotlogin`;
+        else
+            urlToCall = `https://${apIP}:9998/SubscriberPortal/hotspotlogin`;
+
+        const postFunction = () => {
+            axios.post(urlToCall, {
+                url,
+                proxy,
+                uip,
+                client_mac: clientMac,
+            }).then(() => {
+                window.location.replace("https://www.c-n.be");
+            }).catch((error) => {
+                console.log(error);
+            })
+        }
+    </script>
+    <script type="text/javascript" src="https://collection.wifi4eu.ec.europa.eu/wifi4eu.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Ace Sans';
+            font-style: auto;
+            font-weight: auto;
+            src: url('Ace Sans.otf');
+        }
+
+        h1, h2 {
+            font-family: Ace Sans, sans-serif;
+            text-align: center;
+            color: #2e3092
+        }
+
+        p {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .conditions{
+            text-align: center;
+        }
+
+        .cableNetworkPowered {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cableNetworkPowered a {
+            color: #2e3092;
+        }
+
+        .logoCN {
+            width: 100px;
+            object-fit: fill;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .buttons{
+            display: flex;
+            justify-content: center;
+        }
+
+        #clickContinue{
+            cursor: pointer;
+            color: #2e3092;
+            font-family: Ace Sans, sans-serif;
+            font-size: xx-large;
+            padding: 10px;
+            border: 1px solid #2e3092;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<!--<script src="axios.min.js"></script>-->
+
+<!--<script>
+    /*const params = new URLSearchParams(window.location.search);
+    const nbiIP = params.get('nbiIP');
+    const sip = params.get('sip');
+    const url = params.get('url');
+    const proxy = params.get('proxy');
+    const uip = params.get('uip');
+    const clientMac = params.get('client_mac');
+    const apIP = params.get('apip');
+    const sshTunnelStatus = parseInt(params.get('sshTunnelStatus'));
+    console.log('sip', sip);
+    console.log('url', url);
+    console.log('proxy', proxy);
+    console.log('uip', uip);
+    console.log('clientMac', clientMac);
+
+    let domainIp;
+    if(sshTunnelStatus === 1)
+        domainIp = apIP;
+    else
+        domainIp = sip;
+    const urlRuckus = `http://${domainIp}:9997/SubscriberPortal/hotspotlogin`
+    axios.post(urlRuckus,{
+        url,
+        proxy,
+        uip,
+        client_mac: clientMac,
+        username: 'hotspot',
+        password: 'abcd1234'
+    }).then(() => {
+        console.log('success');
+    }).catch((error) => {
+        console.log(error);
+    })*/
+</script>-->
+
+<body>
+<h1>Bienvenue sur le portail captif WiFi4EU</h1>
+<img id="wifi4eubanner"/>
+<div class="conditions">
+    <h2>Conditions d'utilisation</h2>
+    <p>
+        En acceptant cet accord et en accédant au réseau sans fil, vous reconnaissez que vous avez l'âge légal, que vous
+        avez lu et compris et acceptez d'être lié par cet accord.
+    </p>
+    <p>
+        (*) Le service de réseau sans fil est fourni par les propriétaires et est entièrement à leur discrétion. Votre
+        accès au réseau peut être bloqué, suspendu ou résilié à tout moment pour quelque raison que ce soit.
+    </p>
+    <p>
+        (*) Vous acceptez de ne pas utiliser le réseau sans fil à des fins illégales ou autrement interdites et vous
+        êtes entièrement responsable de votre utilisation.
+    </p>
+    <p>
+        (*) Le réseau sans fil est fourni "tel quel" sans garantie d'aucune sorte, expresse ou implicite.
+    </p>
+    <p>
+        Ce réseau sans fil est alimenté par Ruckus Wireless et Cable & Network S.A.
+    </p>
+</div>
+<div class="buttons">
+    <button type="button" id="clickContinue">Continuer</button>
+</div>
+
+<div class="cableNetworkPowered">
+    <img class="logoCN" src="logoCN.png" alt="logo C&N"/>
+    <p>
+        Powered by Cable & Network - <a href="https://www.c-n.be">www.c-n.be</a>
+    </p>
+</div>
+</body>
+<script>
+    const button = document.getElementById('clickContinue');
+    button.addEventListener('click', postFunction);
+</script>
+</html>
