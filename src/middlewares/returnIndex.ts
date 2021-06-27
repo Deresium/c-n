@@ -2,6 +2,7 @@ import {RequestHandler} from "express";
 import path from "path";
 
 const returnIndex: RequestHandler = (req, res, next) => {
+    console.log(req.headers.host);
     if(req.headers.accept?.includes('text/html') && req.headers.host?.includes('captiveportal')){
         const captivePortalFile = path.join(__dirname, '../../public/captiveportal.html');
         res.sendFile(captivePortalFile);
@@ -10,7 +11,7 @@ const returnIndex: RequestHandler = (req, res, next) => {
         const portailCaptifFile = path.join(__dirname, '../../public/portailcaptif.html');
         res.sendFile(portailCaptifFile);
     }
-    else if(req.headers.accept?.includes('text/html') && req.headers.host?.startsWith('menu.')){
+    else if(req.headers.accept?.includes('text/html') && req.headers.host?.startsWith('www.menu.')){
         const portailCaptifFile = path.join(__dirname, '../../public/menudiables.html');
         res.sendFile(portailCaptifFile);
     }
