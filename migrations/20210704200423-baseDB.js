@@ -46,11 +46,11 @@ module.exports = {
                   },
                   name: {
                       type: Sequelize.STRING(1024),
-                      allowNull: false
+                      allowNull: true
                   },
                   email: {
                       type: Sequelize.STRING(1024),
-                      allowNull: false
+                      allowNull: true
                   },
                   microsoftId: {
                       type: Sequelize.STRING(1024),
