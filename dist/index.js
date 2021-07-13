@@ -3,18 +3,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const app_1 = __importDefault(require("./app"));
+const AppSingleton_1 = __importDefault(require("./AppSingleton"));
+const DatabaseSingleton_1 = __importDefault(require("./database/DatabaseSingleton"));
 const port = Number(process.env.PORT);
 const host = process.env.DNS_NAME;
-let server;
+DatabaseSingleton_1.default.getInstance().connect().then(() => console.log('connect to DB from Index'));
+const expressApp = AppSingleton_1.default.getInstance().getExpressApp();
 if (process.env.NODE_ENV !== 'production') {
-    server = app_1.default.listen(port, host, () => {
+    expressApp.listen(port, host, () => {
         console.log(`Server is up and running at http://${host}:${port}/!`);
     });
 }
 else {
-    server = app_1.default.listen(process.env.PORT, () => {
+    expressApp.listen(process.env.PORT, () => {
         console.log(`Server is up and running at http://${host}:${port}/!`);
     });
 }
-exports.default = server;

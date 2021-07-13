@@ -5,21 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
-const redirectHttps_1 = __importDefault(require("./middlewares/redirectHttps"));
-const mongodb_1 = require("./mongodb");
 const returnIndex_1 = __importDefault(require("./middlewares/returnIndex"));
 const CnRouter_1 = __importDefault(require("./routers/CnRouter"));
-const allowLocalhost_1 = __importDefault(require("./middlewares/allowLocalhost"));
 const forceDownloadPDF_1 = __importDefault(require("./middlewares/forceDownloadPDF"));
-mongodb_1.connect();
+//connect();
 const app = express_1.default();
 const publicDirectoryPath = path_1.default.join(__dirname, '../public');
-if (process.env.NODE_ENV === 'production') {
-    app.use(redirectHttps_1.default);
-}
-else {
-    app.use(allowLocalhost_1.default);
-}
 app.use(forceDownloadPDF_1.default);
 app.use(express_1.default.static(publicDirectoryPath));
 app.use(returnIndex_1.default);
