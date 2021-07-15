@@ -25,8 +25,9 @@ class DatabaseSingleton {
         });
     }
     static getInstance() {
-        if (!this.instance)
+        if (!this.instance) {
             this.instance = new DatabaseSingleton();
+        }
         return this.instance;
     }
     getSequelize() {
@@ -37,7 +38,8 @@ class DatabaseSingleton {
             console.log('try to connect...');
             try {
                 yield this.sequelize.authenticate();
-                console.log(`sequelize connexion ok to ${this.sequelize.getDatabaseName()}`);
+                const databaseName = this.sequelize.getDatabaseName();
+                console.log(`sequelize connexion ok to ${databaseName}`);
             }
             catch (error) {
                 console.log('sequelize connexion failed');
@@ -57,3 +59,4 @@ class DatabaseSingleton {
     }
 }
 exports.default = DatabaseSingleton;
+//# sourceMappingURL=DatabaseSingleton.js.map

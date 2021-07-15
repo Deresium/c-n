@@ -19,3 +19,4 @@ class AllowLocalhostMiddleware extends ApplicationMiddleware_1.default {
     }
 }
 exports.default = AllowLocalhostMiddleware;
+//# sourceMappingURL=AllowLocahostMiddleware.js.map

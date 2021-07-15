@@ -1,0 +1,1 @@
+{"version":3,"file":"UserVM.js","sourceRoot":"","sources":["../../../../../src/business/models/login/viewmodels/UserVM.ts"],"names":[],"mappings":";;AAEA,MAAqB,MAAM;IAKvB,YAAY,MAAc,EAAE,KAAa,EAAE,IAAW;QAClD,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;QACrB,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACnB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACrB,CAAC;CAGJ;AAZD,yBAYC"}

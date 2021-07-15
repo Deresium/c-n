@@ -18,3 +18,4 @@ class ForceDownloadPDFMiddleware extends ApplicationMiddleware_1.default {
     }
 }
 exports.default = ForceDownloadPDFMiddleware;
+//# sourceMappingURL=ForceDownloadPDFMiddleware.js.map

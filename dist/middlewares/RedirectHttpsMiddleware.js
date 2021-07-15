@@ -20,3 +20,4 @@ class RedirectHttpsMiddleware extends ApplicationMiddleware_1.default {
     }
 }
 exports.default = RedirectHttpsMiddleware;
+//# sourceMappingURL=RedirectHttpsMiddleware.js.map

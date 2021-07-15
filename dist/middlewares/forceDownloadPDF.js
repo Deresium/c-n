@@ -7,3 +7,4 @@ const forceDownloadPDF = (req, res, next) => {
     next();
 };
 exports.default = forceDownloadPDF;
+//# sourceMappingURL=forceDownloadPDF.js.map

@@ -19,3 +19,4 @@ else {
         console.log(`Server is up and running at http://${host}:${port}/!`);
     });
 }
+//# sourceMappingURL=index.js.map

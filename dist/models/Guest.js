@@ -47,3 +47,4 @@ guestSchema.methods.toMailString = function (separator) {
     Email: ${this.email}${separator}`;
 };
 exports.default = mongoose_1.default.model('Guest', guestSchema);
+//# sourceMappingURL=Guest.js.map

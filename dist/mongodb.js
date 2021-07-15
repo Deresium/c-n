@@ -18,3 +18,4 @@ const connect = () => {
     });
 };
 exports.connect = connect;
+//# sourceMappingURL=mongodb.js.map

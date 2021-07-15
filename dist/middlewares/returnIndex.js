@@ -27,3 +27,4 @@ const returnIndex = (req, res, next) => {
         next();
 };
 exports.default = returnIndex;
+//# sourceMappingURL=returnIndex.js.map

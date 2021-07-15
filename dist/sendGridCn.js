@@ -57,3 +57,4 @@ function getContactText(contact, separator) {
     return `Vous avez reçu un nouveau message de ${contact.name} ${contact.firstName} ( ${(contact.company) ? contact.company : 'société non spécifiée'} ) - ${contact.email}: ${separator}
     ${contact.request.replace('\n', separator)}`;
 }
+//# sourceMappingURL=sendGridCn.js.map

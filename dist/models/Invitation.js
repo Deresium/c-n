@@ -37,3 +37,4 @@ invitationSchema.virtual('guestList', {
     foreignField: 'invitation'
 });
 exports.default = mongoose_1.default.model('Invitation', invitationSchema);
+//# sourceMappingURL=Invitation.js.map

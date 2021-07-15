@@ -24,8 +24,8 @@
 <style>
 @font-face {
     font-family: 'Ace Sans';
-    font-style: auto;
-    font-weight: auto;
+    font-style: normal;
+    font-weight: normal;
     src: url('assets/fonts/Ace Sans.otf');
 }
 

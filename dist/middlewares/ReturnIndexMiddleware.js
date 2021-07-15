@@ -34,3 +34,4 @@ class ReturnIndexMiddleware extends ApplicationMiddleware_1.default {
     }
 }
 exports.default = ReturnIndexMiddleware;
+//# sourceMappingURL=ReturnIndexMiddleware.js.map

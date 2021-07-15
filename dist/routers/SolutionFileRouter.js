@@ -9,3 +9,4 @@ class SolutionFileRouter extends ApplicationRouter_1.default {
     }
 }
 exports.default = SolutionFileRouter;
+//# sourceMappingURL=SolutionFileRouter.js.map

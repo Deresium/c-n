@@ -8,5 +8,6 @@ declare namespace NodeJS{
         DB_NAME: string;
         DATABASE_URL: string;
         AZURE_APP_ID: string;
+        JWT_SECRET: string;
     }
 }

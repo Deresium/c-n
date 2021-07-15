@@ -41,3 +41,4 @@ class MicrosoftPublicKey {
     }
 }
 exports.default = MicrosoftPublicKey;
+//# sourceMappingURL=MicrosoftPublicKey.js.map

@@ -6,6 +6,7 @@ import ForceDownloadPDFMiddleware from "./middlewares/ForceDownloadPDFMiddleware
 import ReturnIndexMiddleware from "./middlewares/ReturnIndexMiddleware";
 import LoginRouter from "./routers/LoginRouter";
 import LoginFacade from "./business/facades/LoginFacade";
+import UserDataMapper from "./database/datamappers/UserDataMapper";
 
 
 export default class AppSingleton{
@@ -18,8 +19,9 @@ export default class AppSingleton{
     }
 
     public static getInstance(): AppSingleton{
-        if(!this.instance)
+        if(!this.instance) {
             this.instance = new AppSingleton();
+        }
         return this.instance;
     }
 
@@ -31,17 +33,19 @@ export default class AppSingleton{
         const publicDirectoryPath = path.join(__dirname, '../public');
         this.expressApp.use(express.static(publicDirectoryPath));
 
-        if(process.env.NODE_ENV === 'production')
+        if(process.env.NODE_ENV === 'production') {
             this.expressApp.use(new RedirectHttpsMiddleware().getRequestHandler());
-        else
+        }
+        else {
             this.expressApp.use(new AllowLocalhostMiddleware().getRequestHandler());
+        }
 
         this.expressApp.use(new ForceDownloadPDFMiddleware().getRequestHandler());
 
         this.expressApp.use(new ReturnIndexMiddleware().getRequestHandler());
 
         this.expressApp.use(express.json());
-        this.expressApp.use(new LoginRouter(new LoginFacade()).getRouter());
+        this.expressApp.use(new LoginRouter(new LoginFacade(new UserDataMapper())).getRouter());
 
     }
 }
