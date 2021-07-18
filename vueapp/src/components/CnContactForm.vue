@@ -46,9 +46,9 @@
 
 <script lang="ts">
     import {defineComponent, ref} from "vue";
-    import GuestForm from "@/models/GuestForm";
+    import GuestForm from "@/business/models/GuestForm";
     import validator from "validator";
-    import Contact from "@/models/Contact";
+    import Contact from "@/business/models/Contact";
     import axiosCn from "@/axios/axiosCn";
 
     export default defineComponent({

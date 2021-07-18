@@ -1,4 +1,4 @@
-import Guest from "@/models/Guest";
+import Guest from "@/business/models/Guest";
 import validator from "validator";
 
 export default class GuestForm extends Guest{

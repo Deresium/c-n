@@ -1,0 +1,1 @@
+{"version":3,"file":"SolutionFileVM.js","sourceRoot":"","sources":["../../../../../src/business/models/solutionfile/viewmodels/SolutionFileVM.ts"],"names":[],"mappings":";;AAAA,MAAqB,cAAc;IAK/B,YAAY,cAAsB,EAAE,KAAa,EAAE,WAAmB;QAClE,IAAI,CAAC,cAAc,GAAG,cAAc,CAAC;QACrC,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACnB,IAAI,CAAC,WAAW,GAAG,WAAW,CAAC;IACnC,CAAC;CACJ;AAVD,iCAUC"}

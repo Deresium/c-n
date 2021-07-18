@@ -68,6 +68,7 @@
   },
     "include": [
         "./src/**/*",
-        "customEnv.d.ts"
+        "customEnv.d.ts",
+        "customRequest.d.ts"
     ]
 }

@@ -1,4 +1,4 @@
-import Guest from "@/models/Guest";
+import Guest from "@/business/models/Guest";
 
 export default class Invitation{
     private readonly company: string|null;

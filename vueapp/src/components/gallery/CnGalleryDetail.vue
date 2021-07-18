@@ -17,7 +17,7 @@ import {Galleries} from "@/enums/Galleries";
 <script lang="ts">
 import {defineComponent, ref} from "vue";
 import CnGalleryTitle from "@/components/gallery/CnGalleryTitle.vue";
-import {Galleries} from "@/enums/Galleries";
+import {Galleries} from "@/business/enums/Galleries";
 
 export default defineComponent({
     components: {

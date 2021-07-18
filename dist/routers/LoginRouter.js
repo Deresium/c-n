@@ -24,10 +24,12 @@ class LoginRouter extends ApplicationRouter_1.default {
             const token = req.body.idToken;
             if (!token) {
                 res.status(400).send();
+                return;
             }
             const userVM = yield this.loginRequester.login(token);
             if (!userVM) {
                 res.status(401).send();
+                return;
             }
             const cookieGenerator = new CookiesGenerator_1.default(userVM);
             res.setHeader('Set-Cookie', [cookieGenerator.getSignatureCookie(), cookieGenerator.getPayloadCookie()]);

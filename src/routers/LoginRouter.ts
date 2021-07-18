@@ -16,12 +16,14 @@ export default class LoginRouter extends ApplicationRouter {
 
             if (!token) {
                 res.status(400).send();
+                return;
             }
 
             const userVM = await this.loginRequester.login(token);
 
             if(!userVM){
                 res.status(401).send();
+                return;
             }
 
             const cookieGenerator = new CookiesGenerator(userVM);

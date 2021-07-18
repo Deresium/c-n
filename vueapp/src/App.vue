@@ -9,14 +9,32 @@
 </template>
 
 <script lang="ts">
-    import {defineComponent} from "vue";
-    import CnNavbar from "@/components/commons/CnNavbar.vue";
-    import CnFooter from "@/components/commons/CnFooter.vue";
+import {defineComponent} from "vue";
+import CnNavbar from "@/components/commons/CnNavbar.vue";
+import CnFooter from "@/components/commons/CnFooter.vue";
+import {useRoute} from "vue-router";
+import SendTokenLogin from "@/business/login/SendTokenLogin";
+import DecryptCookie from "@/business/login/DecryptCookie";
 
-    export default defineComponent({
+export default defineComponent({
         components: {
             CnNavbar,
             CnFooter
+        },
+        setup(){
+            const sendIdTokenToLogin = () => {
+                const currentUrl = window.location.href;
+                const pattern = /.*id_token=(.*)&.*/m;
+                const result = currentUrl.match(pattern);
+                if(result) {
+                    const idToken = result[1];
+                    new SendTokenLogin().sendTokenToLogin(idToken);
+                }
+                else{
+                    new DecryptCookie().tryLoginUser();
+                }
+            };
+            sendIdTokenToLogin();
         }
     })
 </script>

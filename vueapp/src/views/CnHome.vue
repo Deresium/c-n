@@ -133,30 +133,17 @@
 </template>
 
 <script lang="ts">
-    import {defineComponent} from "vue";
-    import {useRoute} from "vue-router";
-    import axiosCn from "@/axios/axiosCn";
-    export default defineComponent({
-        setup(){
-            const sendTokenToLogin = (idToken: string) => {
-                axiosCn.post('/login', {
-                    idToken
-                }).then((response) => {
-                    alert('Connected');
-                }).catch((error) => {
-                    alert('error');
-                })
-            }
+import {defineComponent, computed} from "vue";
+import store from "@/store/store";
 
-            const {fullPath} = useRoute();
-            const pattern = /.*id_token=(.*)&.*/m;
-            const result = fullPath.match(pattern);
-            if(result) {
-                const idToken = result[1];
-                sendTokenToLogin(idToken);
-            }
+export default defineComponent({
+    setup(){
+        const userRole = computed(() => store.getters['login/getRole']);
+        return {
+            userRole
         }
-    })
+    }
+})
 </script>
 
 <style scoped>

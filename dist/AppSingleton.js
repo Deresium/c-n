@@ -12,6 +12,13 @@ const ReturnIndexMiddleware_1 = __importDefault(require("./middlewares/ReturnInd
 const LoginRouter_1 = __importDefault(require("./routers/LoginRouter"));
 const LoginFacade_1 = __importDefault(require("./business/facades/LoginFacade"));
 const UserDataMapper_1 = __importDefault(require("./database/datamappers/UserDataMapper"));
+const ExtractTokenMiddleware_1 = __importDefault(require("./middlewares/ExtractTokenMiddleware"));
+const SolutionFileCategoryRouter_1 = __importDefault(require("./routers/SolutionFileCategoryRouter"));
+const SolutionFileFacade_1 = __importDefault(require("./business/facades/SolutionFileFacade"));
+const AwsFileDataMapper_1 = __importDefault(require("./external/aws/AwsFileDataMapper"));
+const AwsOperations_1 = __importDefault(require("./external/aws/AwsOperations"));
+const SolutionFilesDataMapper_1 = __importDefault(require("./database/datamappers/SolutionFilesDataMapper"));
+const PublicFilesRouter_1 = __importDefault(require("./routers/PublicFilesRouter"));
 class AppSingleton {
     constructor() {
         this.expressApp = express_1.default();
@@ -36,9 +43,12 @@ class AppSingleton {
             this.expressApp.use(new AllowLocahostMiddleware_1.default().getRequestHandler());
         }
         this.expressApp.use(new ForceDownloadPDFMiddleware_1.default().getRequestHandler());
+        this.expressApp.use(new PublicFilesRouter_1.default(new SolutionFileFacade_1.default(new AwsFileDataMapper_1.default(new AwsOperations_1.default()), new SolutionFilesDataMapper_1.default())).getRouter());
         this.expressApp.use(new ReturnIndexMiddleware_1.default().getRequestHandler());
         this.expressApp.use(express_1.default.json());
+        this.expressApp.use(new ExtractTokenMiddleware_1.default().getRequestHandler());
         this.expressApp.use(new LoginRouter_1.default(new LoginFacade_1.default(new UserDataMapper_1.default())).getRouter());
+        this.expressApp.use(new SolutionFileCategoryRouter_1.default(new SolutionFileFacade_1.default(new AwsFileDataMapper_1.default(new AwsOperations_1.default()), new SolutionFilesDataMapper_1.default())).getRouter());
     }
 }
 exports.default = AppSingleton;

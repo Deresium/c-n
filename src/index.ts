@@ -7,12 +7,12 @@ const host = process.env.DNS_NAME;
 DatabaseSingleton.getInstance().connect().then(() => console.log('connect to DB from Index'));
 
 const expressApp = AppSingleton.getInstance().getExpressApp();
-if(process.env.NODE_ENV !== 'production'){
-    expressApp.listen(port, host,()=>{
+if (process.env.NODE_ENV === 'production') {
+    expressApp.listen(process.env.PORT, () => {
         console.log(`Server is up and running at http://${host}:${port}/!`);
     });
-}else{
-    expressApp.listen(process.env.PORT,()=>{
+} else {
+    expressApp.listen(port, host, () => {
         console.log(`Server is up and running at http://${host}:${port}/!`);
     });
 }
