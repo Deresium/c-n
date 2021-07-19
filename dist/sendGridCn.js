@@ -31,7 +31,7 @@ const sendContactMail = (contact) => __awaiter(void 0, void 0, void 0, function*
     yield mail_1.default.send({
         to,
         from,
-        subject: `Nouveau message de ${contact.name} ${contact.firstName}`,
+        subject: `Nouveau message de ${contact.getName()} ${contact.getFirstName()}`,
         text: getContactText(contact, '\n'),
         html: getContactText(contact, '<br/>')
     });
@@ -54,7 +54,7 @@ function getNewInvitationText(invitation, separator) {
     ${guestListString(invitation.guestList, separator)}`;
 }
 function getContactText(contact, separator) {
-    return `Vous avez reçu un nouveau message de ${contact.name} ${contact.firstName} ( ${(contact.company) ? contact.company : 'société non spécifiée'} ) - ${contact.email}: ${separator}
-    ${contact.request.replace('\n', separator)}`;
+    return `Vous avez reçu un nouveau message de ${contact.getName()} ${contact.getFirstName()} ( ${(contact.getCompany()) ? contact.getCompany() : 'société non spécifiée'} ) - ${contact.getEmail()}: ${separator}
+    ${contact.getMessage().replace('\n', separator)}`;
 }
 //# sourceMappingURL=sendGridCn.js.map

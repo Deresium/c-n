@@ -48,12 +48,14 @@
             loader.load().then(() => {
                 const company = { lat: 50.525158, lng: 5.234901};
                 //@ts-ignore
+                // eslint-disable-next-line no-undef
                 const map = new google.maps.Map(document.getElementById("googleMap") as HTMLElement, {
                     center: company,
                     zoom: 15,
                 });
 
                 //@ts-ignore
+                // eslint-disable-next-line no-undef
                 new google.maps.Marker({
                     position: company,
                     map: map

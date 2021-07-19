@@ -2,11 +2,32 @@ import ISolutionFileDataGateway from "../datagateways/ISolutionFileDataGateway";
 import SolutionFileEntity from "../entities/SolutionFileEntity";
 import SolutionFileCategoryEntity from "../entities/SolutionFileCategoryEntity";
 import SolutionFileDS from "../../business/models/solutionfile/datastores/SolutionFileDS";
-import {Transaction, Op} from "sequelize";
+import {Op, Transaction} from "sequelize";
 import DatabaseSingleton from "../DatabaseSingleton";
-import SolutionFileCategoryVM from "../../business/models/solutionfile/viewmodels/SolutionFileCategoryVM";
+import SolutionFileUpdateDS from "../../business/models/solutionfile/datastores/SolutionFileUpdateDS";
 
-export default class SolutionFilesDataMapper implements ISolutionFileDataGateway{
+export default class SolutionFilesDataMapper implements ISolutionFileDataGateway {
+
+    async updateSolutionFile(solutionFileUpdateDS: SolutionFileUpdateDS): Promise<void> {
+        await SolutionFileEntity.update({
+            title: solutionFileUpdateDS.getTitle(),
+            description: solutionFileUpdateDS.getDescription()
+        },{
+            where:{
+                solutionFileId: solutionFileUpdateDS.getSolutionFileId()
+            }
+        })
+    }
+
+    async updateSolutionFileCategory(solutionFileCategoryId: number, name: string): Promise<void> {
+        await SolutionFileCategoryEntity.update({
+            name
+        },{
+            where: {
+                solutionFileCategoryId
+            }
+        })
+    }
     async getNextSolutionFileCategoryOrder(): Promise<number> {
         const solutionFileCategoryCount = await SolutionFileCategoryEntity.count();
         return solutionFileCategoryCount + 1;
@@ -73,6 +94,70 @@ export default class SolutionFilesDataMapper implements ISolutionFileDataGateway
             const solutionFileCategories = await SolutionFilesDataMapper.getSolutionFileCategoriesWithHigherOrder(destroyedSolutionFileCategory.getOrder());
             for(const solutionFileCategory of solutionFileCategories){
                 await SolutionFilesDataMapper.decreaseSolutionFileCategoryOrderByOne(solutionFileCategory.getSolutionFileCategoryId(), t);
+            }
+        });
+    }
+
+    private static async getSolutionFilesWithHigherOrder(solutionFileCategoryId: number, order: number) {
+        return await SolutionFileEntity.findAll({
+            where:{
+                solutionFileCategoryId,
+                order: {
+                    [Op.gt]: order
+                }
+            }
+        })
+    }
+
+    private static async decreaseSolutionFileOrderByOne(solutionFileId: number, t: Transaction): Promise<void> {
+        await SolutionFileEntity.increment({order: -1}, {where: {solutionFileId}, transaction: t})
+    }
+
+    public async deleteSolutionFile(solutionFileId: number): Promise<void> {
+        await DatabaseSingleton.getInstance().getSequelize().transaction(async(t) => {
+            const destroyedFileSolution = await SolutionFileEntity.findByPk(solutionFileId);
+
+            await SolutionFileEntity.destroy({
+                where:{
+                    solutionFileId
+                },
+                transaction: t
+            });
+
+            const solutionFiles = await SolutionFilesDataMapper.getSolutionFilesWithHigherOrder(destroyedFileSolution.getSolutionFileCategoryId(), destroyedFileSolution.getOrder());
+            for(const solutionFile of solutionFiles){
+                await SolutionFilesDataMapper.decreaseSolutionFileOrderByOne(solutionFile.getSolutionFileId(), t);
+            }
+
+        });
+    }
+
+    public async reorderSolutionFileCategories(solutionFileCategoryIds: Array<number>): Promise<void> {
+        await DatabaseSingleton.getInstance().getSequelize().transaction(async(t) => {
+            for(let i = 0; i < solutionFileCategoryIds.length; ++i){
+                await SolutionFileCategoryEntity.update({
+                    order: i + 1
+                },{
+                    where:{
+                        solutionFileCategoryId: solutionFileCategoryIds[i]
+                    },
+                    transaction: t
+                })
+            }
+        });
+    }
+
+    public async reorderSolutionFiles(solutionFileIds: Array<number>): Promise<void> {
+        await DatabaseSingleton.getInstance().getSequelize().transaction(async(t) => {
+            for(let i = 0; i < solutionFileIds.length; ++i){
+                await SolutionFileEntity.update({
+                    order: i + 1
+                },{
+                    where:{
+                        solutionFileId: solutionFileIds[i]
+                    },
+                    transaction: t
+                })
             }
         });
     }

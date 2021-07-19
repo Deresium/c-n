@@ -17,16 +17,12 @@ export default class ReturnIndexMiddleware extends ApplicationMiddleware {
                 const portailCaptifFile = path.join(__dirname, '../../public/portailcaptif.html');
                 res.sendFile(portailCaptifFile);
             }
-            else if(req.headers.accept?.includes('text/html') && req.headers.host?.startsWith('www.menu.')){
-                const portailCaptifFile = path.join(__dirname, '../../public/menudiables.html');
-                res.sendFile(portailCaptifFile);
-            }
             else if(req.headers.accept?.includes('text/html') && !req.url.includes('solutionsfiles')){
                 const publicDirectoryPath = path.join(__dirname, '../../public/c-n');
                 res.sendFile(publicDirectoryPath + '/index.html');
-            }else
+            }else {
                 next();
+            }
         }
     }
-
 }

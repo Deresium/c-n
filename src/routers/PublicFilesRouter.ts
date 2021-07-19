@@ -18,7 +18,24 @@ export default class PublicFilesRouter extends ApplicationRouter{
             }else{
                 res.status(404).send();
             }
-        })
+        });
+
+        this.getRouter().get('/solutionFile/:id/pdfFile/:fileName', async(req, res) => {
+            const file = await this.solutionFileRequester.getSolutionFilePdf(parseInt(req.params.id));
+            const fileName = req.params.fileName;
+            const download = req.query.download === 'true';
+            if(file) {
+                res.set('Content-Type', 'application/pdf');
+                if(download) {
+                    res.setHeader('Content-disposition', `attachment;filename=${fileName}.pdf`);
+                } else {
+                    res.setHeader('Content-disposition', `inline`);
+                }
+                res.send(file);
+            }else{
+                res.status(404).send();
+            }
+        });
     }
 
 }

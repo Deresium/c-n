@@ -6,8 +6,9 @@ import SolutionFileCategoryVM from "../models/solutionfile/viewmodels/SolutionFi
 import SolutionFileVM from "../models/solutionfile/viewmodels/SolutionFileVM";
 import SolutionFileEntity from "../../database/entities/SolutionFileEntity";
 import SolutionFileDS from "../models/solutionfile/datastores/SolutionFileDS";
+import SolutionFileUpdateDS from "../models/solutionfile/datastores/SolutionFileUpdateDS";
 
-export default class SolutionFileFacade implements ISolutionFileRequester{
+export default class SolutionFileFacade implements ISolutionFileRequester {
     private fileDataGateway: IFileDataGateway;
     private solutionFileDataGateway: ISolutionFileDataGateway;
 
@@ -15,10 +16,25 @@ export default class SolutionFileFacade implements ISolutionFileRequester{
         this.fileDataGateway = fileDataGateway;
         this.solutionFileDataGateway = solutionFileDataGateway;
     }
+
+    async updateSolutionFile(solutionFileUpdateDS: SolutionFileUpdateDS): Promise<void> {
+        await this.solutionFileDataGateway.updateSolutionFile(solutionFileUpdateDS);
+        if(solutionFileUpdateDS.getPdfFile()){
+            await this.fileDataGateway.postSolutionFile(solutionFileUpdateDS.getSolutionFileId(), solutionFileUpdateDS.getPdfFile());
+        }
+    }
+
     async addSolutionFileCategory(solutionCategoryName:string, icon: Buffer): Promise<void> {
         const order = await this.solutionFileDataGateway.getNextSolutionFileCategoryOrder();
         const solutionFileCategoryEntity: SolutionFileCategoryEntity = await this.solutionFileDataGateway.addSolutionFileCategory(solutionCategoryName, order);
         await this.fileDataGateway.postIconSolutionCategory(solutionFileCategoryEntity.getSolutionFileCategoryId(), icon);
+    }
+
+    async updateSolutionFileCategory(solutionFileCategoryId: number, solutionCategoryName: string, icon: Buffer): Promise<void>{
+        await this.solutionFileDataGateway.updateSolutionFileCategory(solutionFileCategoryId, solutionCategoryName);
+        if(icon) {
+            await this.fileDataGateway.postIconSolutionCategory(solutionFileCategoryId, icon);
+        }
     }
 
     async addSolutionFile(solutionFile: SolutionFileDS): Promise<void> {
@@ -53,5 +69,23 @@ export default class SolutionFileFacade implements ISolutionFileRequester{
 
     async deleteSolutionFileCategory(solutionFileCategoryId: number): Promise<void> {
         await this.solutionFileDataGateway.deleteSolutionFileCategory(solutionFileCategoryId);
+        await this.fileDataGateway.deleteIconSolutionCategory(solutionFileCategoryId);
+    }
+
+    async deleteSolutionFile(solutionFileId: number): Promise<void> {
+        await this.solutionFileDataGateway.deleteSolutionFile(solutionFileId);
+        await this.fileDataGateway.deleteSolutionFile(solutionFileId);
+    }
+
+    async getSolutionFilePdf(solutionFileId: number): Promise<any> {
+        return await this.fileDataGateway.getSolutionFile(solutionFileId);
+    }
+
+    public async reorderSolutionFileCategories(solutionFileCategoryIds: Array<number>): Promise<void> {
+        return await this.solutionFileDataGateway.reorderSolutionFileCategories(solutionFileCategoryIds);
+    }
+
+    public async reorderSolutionFiles(solutionFileIds: Array<number>): Promise<void> {
+        return await this.solutionFileDataGateway.reorderSolutionFiles(solutionFileIds);
     }
 }

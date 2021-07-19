@@ -20,11 +20,27 @@ class SolutionFileFacade {
         this.fileDataGateway = fileDataGateway;
         this.solutionFileDataGateway = solutionFileDataGateway;
     }
+    updateSolutionFile(solutionFileUpdateDS) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.solutionFileDataGateway.updateSolutionFile(solutionFileUpdateDS);
+            if (solutionFileUpdateDS.getPdfFile()) {
+                yield this.fileDataGateway.postSolutionFile(solutionFileUpdateDS.getSolutionFileId(), solutionFileUpdateDS.getPdfFile());
+            }
+        });
+    }
     addSolutionFileCategory(solutionCategoryName, icon) {
         return __awaiter(this, void 0, void 0, function* () {
             const order = yield this.solutionFileDataGateway.getNextSolutionFileCategoryOrder();
             const solutionFileCategoryEntity = yield this.solutionFileDataGateway.addSolutionFileCategory(solutionCategoryName, order);
             yield this.fileDataGateway.postIconSolutionCategory(solutionFileCategoryEntity.getSolutionFileCategoryId(), icon);
+        });
+    }
+    updateSolutionFileCategory(solutionFileCategoryId, solutionCategoryName, icon) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.solutionFileDataGateway.updateSolutionFileCategory(solutionFileCategoryId, solutionCategoryName);
+            if (icon) {
+                yield this.fileDataGateway.postIconSolutionCategory(solutionFileCategoryId, icon);
+            }
         });
     }
     addSolutionFile(solutionFile) {
@@ -61,6 +77,28 @@ class SolutionFileFacade {
     deleteSolutionFileCategory(solutionFileCategoryId) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.solutionFileDataGateway.deleteSolutionFileCategory(solutionFileCategoryId);
+            yield this.fileDataGateway.deleteIconSolutionCategory(solutionFileCategoryId);
+        });
+    }
+    deleteSolutionFile(solutionFileId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.solutionFileDataGateway.deleteSolutionFile(solutionFileId);
+            yield this.fileDataGateway.deleteSolutionFile(solutionFileId);
+        });
+    }
+    getSolutionFilePdf(solutionFileId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.fileDataGateway.getSolutionFile(solutionFileId);
+        });
+    }
+    reorderSolutionFileCategories(solutionFileCategoryIds) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.solutionFileDataGateway.reorderSolutionFileCategories(solutionFileCategoryIds);
+        });
+    }
+    reorderSolutionFiles(solutionFileIds) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.solutionFileDataGateway.reorderSolutionFiles(solutionFileIds);
         });
     }
 }

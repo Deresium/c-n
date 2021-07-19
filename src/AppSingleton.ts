@@ -14,6 +14,9 @@ import AwsFileDataMapper from "./external/aws/AwsFileDataMapper";
 import AwsOperations from "./external/aws/AwsOperations";
 import SolutionFilesDataMapper from "./database/datamappers/SolutionFilesDataMapper";
 import PublicFilesRouter from "./routers/PublicFilesRouter";
+import ContactRouter from "./routers/ContactRouter";
+import ContactFacade from "./business/facades/ContactFacade";
+import ContactDataMapper from "./database/datamappers/ContactDataMapper";
 
 
 export default class AppSingleton{
@@ -47,8 +50,6 @@ export default class AppSingleton{
             this.expressApp.use(new AllowLocalhostMiddleware().getRequestHandler());
         }
 
-        this.expressApp.use(new ForceDownloadPDFMiddleware().getRequestHandler());
-
         this.expressApp.use(new PublicFilesRouter(new SolutionFileFacade(new AwsFileDataMapper(new AwsOperations()), new SolutionFilesDataMapper())).getRouter());
 
         this.expressApp.use(new ReturnIndexMiddleware().getRequestHandler());
@@ -58,6 +59,7 @@ export default class AppSingleton{
         this.expressApp.use(new ExtractTokenMiddleware().getRequestHandler());
 
         this.expressApp.use(new LoginRouter(new LoginFacade(new UserDataMapper())).getRouter());
+        this.expressApp.use(new ContactRouter(new ContactFacade(new ContactDataMapper())).getRouter());
         this.expressApp.use(new SolutionFileCategoryRouter(new SolutionFileFacade(new AwsFileDataMapper(new AwsOperations()), new SolutionFilesDataMapper())).getRouter());
 
     }

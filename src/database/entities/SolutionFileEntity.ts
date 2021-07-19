@@ -19,6 +19,14 @@ export default class SolutionFileEntity extends Model{
     public getDescription(){
         return this.description;
     }
+
+    public getSolutionFileCategoryId(){
+        return this.solutionFileCategoryId;
+    }
+
+    public getOrder(){
+        return this.order;
+    }
 }
 
 SolutionFileEntity.init({

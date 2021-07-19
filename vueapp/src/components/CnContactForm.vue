@@ -66,27 +66,27 @@
                 else{
                     requestError.value = '';
                 }
-            }
+            };
 
             const checkForm = (): boolean => {
                 const checkOk = contact.value.checkGuest();
                 checkRequest();
                 return checkOk && !requestError.value;
-            }
+            };
 
             const resetForm = () => {
                 contact.value.reset();
                 company.value = '';
                 request.value = '';
-            }
+            };
 
             const submitContact = async() => {
                 try {
                     disableSending.value = true;
                     if (checkForm()) {
                         const contactToSend = new Contact(contact.value.guestName, contact.value.guestFirstName, contact.value.guestEmail, company.value, request.value);
-                        const response = await axiosCn.post('/cn/contact', {contactToSend})
-                        if(response.status == 200){
+                        const response = await axiosCn.post('/cn/contact', {contact: contactToSend});
+                        if(response.status === 200){
                             resetForm();
                             alert('Merci pour votre message. Nous revenons vers vous au plus vite');
                         }
@@ -98,7 +98,7 @@
                 } finally {
                     disableSending.value = false;
                 }
-            }
+            };
 
             return{
                 submitContact,

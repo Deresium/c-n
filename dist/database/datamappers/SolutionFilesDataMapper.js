@@ -17,6 +17,29 @@ const SolutionFileCategoryEntity_1 = __importDefault(require("../entities/Soluti
 const sequelize_1 = require("sequelize");
 const DatabaseSingleton_1 = __importDefault(require("../DatabaseSingleton"));
 class SolutionFilesDataMapper {
+    updateSolutionFile(solutionFileUpdateDS) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield SolutionFileEntity_1.default.update({
+                title: solutionFileUpdateDS.getTitle(),
+                description: solutionFileUpdateDS.getDescription()
+            }, {
+                where: {
+                    solutionFileId: solutionFileUpdateDS.getSolutionFileId()
+                }
+            });
+        });
+    }
+    updateSolutionFileCategory(solutionFileCategoryId, name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield SolutionFileCategoryEntity_1.default.update({
+                name
+            }, {
+                where: {
+                    solutionFileCategoryId
+                }
+            });
+        });
+    }
     getNextSolutionFileCategoryOrder() {
         return __awaiter(this, void 0, void 0, function* () {
             const solutionFileCategoryCount = yield SolutionFileCategoryEntity_1.default.count();
@@ -89,6 +112,72 @@ class SolutionFilesDataMapper {
                 const solutionFileCategories = yield SolutionFilesDataMapper.getSolutionFileCategoriesWithHigherOrder(destroyedSolutionFileCategory.getOrder());
                 for (const solutionFileCategory of solutionFileCategories) {
                     yield SolutionFilesDataMapper.decreaseSolutionFileCategoryOrderByOne(solutionFileCategory.getSolutionFileCategoryId(), t);
+                }
+            }));
+        });
+    }
+    static getSolutionFilesWithHigherOrder(solutionFileCategoryId, order) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield SolutionFileEntity_1.default.findAll({
+                where: {
+                    solutionFileCategoryId,
+                    order: {
+                        [sequelize_1.Op.gt]: order
+                    }
+                }
+            });
+        });
+    }
+    static decreaseSolutionFileOrderByOne(solutionFileId, t) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield SolutionFileEntity_1.default.increment({ order: -1 }, { where: { solutionFileId }, transaction: t });
+        });
+    }
+    deleteSolutionFile(solutionFileId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield DatabaseSingleton_1.default.getInstance().getSequelize().transaction((t) => __awaiter(this, void 0, void 0, function* () {
+                const destroyedFileSolution = yield SolutionFileEntity_1.default.findByPk(solutionFileId);
+                yield SolutionFileEntity_1.default.destroy({
+                    where: {
+                        solutionFileId
+                    },
+                    transaction: t
+                });
+                const solutionFiles = yield SolutionFilesDataMapper.getSolutionFilesWithHigherOrder(destroyedFileSolution.getSolutionFileCategoryId(), destroyedFileSolution.getOrder());
+                for (const solutionFile of solutionFiles) {
+                    yield SolutionFilesDataMapper.decreaseSolutionFileOrderByOne(solutionFile.getSolutionFileId(), t);
+                }
+            }));
+        });
+    }
+    reorderSolutionFileCategories(solutionFileCategoryIds) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield DatabaseSingleton_1.default.getInstance().getSequelize().transaction((t) => __awaiter(this, void 0, void 0, function* () {
+                for (let i = 0; i < solutionFileCategoryIds.length; ++i) {
+                    yield SolutionFileCategoryEntity_1.default.update({
+                        order: i + 1
+                    }, {
+                        where: {
+                            solutionFileCategoryId: solutionFileCategoryIds[i]
+                        },
+                        transaction: t
+                    });
+                }
+            }));
+        });
+    }
+    reorderSolutionFiles(solutionFileIds) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield DatabaseSingleton_1.default.getInstance().getSequelize().transaction((t) => __awaiter(this, void 0, void 0, function* () {
+                for (let i = 0; i < solutionFileIds.length; ++i) {
+                    yield SolutionFileEntity_1.default.update({
+                        order: i + 1
+                    }, {
+                        where: {
+                            solutionFileId: solutionFileIds[i]
+                        },
+                        transaction: t
+                    });
                 }
             }));
         });

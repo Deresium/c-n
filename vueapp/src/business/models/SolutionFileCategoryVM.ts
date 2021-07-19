@@ -27,4 +27,8 @@ export default class SolutionFileCategoryVM{
         return this.solutionFiles;
     }
 
+    getSolutionFilesIds(): Array<number> {
+        return this.solutionFiles.map(solutionFile => solutionFile.getSolutionFileId());
+    }
+
 }

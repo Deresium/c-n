@@ -8,20 +8,11 @@
                 Les Fiches Solutions nous permettent de vous présenter plus en détails les différentes solutions que
                 nous vous proposons.
             </h3>
-            <form v-if="isAdmin" class="formAddSolutionFileCategory" @submit.prevent="submitAddSolutionFileCategory" novalidate="novalidate">
-                <p class="formTitle">Ajouter une catégorie</p>
-                <label class="labelName">
-                    <span>Nom</span>
-                    <input type="text" v-model="solutionFileCategoryName"/>
-                </label>
-                <label class="inputIcon">
-                    <input type="file" @change="changeIcon"/>
-                    <span class="pickFile">Choisir un fichier</span>
-                    <span class="spanIconName" v-if="icon && icon.name">{{ icon.name }}</span>
-                </label>
-                <button class="btnAddCategory" type="submit">Ajouter une catégorie</button>
-            </form>
-            <div class="solutionFileCategories">
+            <button v-if="isAdmin" class="btnAddCategory" @click="showModal">Ajouter une catégorie</button>
+            <CnModal v-model="showModalAddCategory">
+                <CnSolutionFileCategoryForm @refresh="getSolutionFileCategories"/>
+            </CnModal>
+            <div class="solutionFileCategories" ref="solutionFileCategoriesHtml">
                 <CnSolutionFileCategory
                     v-for="solutionFileCategory in solutionFileCategories"
                     :key="solutionFileCategory.getSolutionFileCategoryId()"
@@ -34,53 +25,64 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, ref} from "vue";
+import {computed, defineComponent, onMounted, ref} from "vue";
 import CnTitle from "@/components/commons/CnTitle.vue";
 import SolutionFileCategoryVM from "@/business/models/SolutionFileCategoryVM";
 import SolutionFileCategoryRequest from "@/business/requesters/requests/SolutionFileCategoryRequest";
 import store from "@/store/store";
-import axiosCn from "@/axios/axiosCn";
 import CnSolutionFileCategory from "@/components/solutionfiles/CnSolutionFileCategory.vue";
+import CnModal from "@/components/commons/CnModal.vue";
+import CnSolutionFileCategoryForm from "@/components/solutionfiles/CnSolutionFileCategoryForm.vue";
+import Sortable from "sortablejs";
+import axiosCn from "@/axios/axiosCn";
 
 export default defineComponent({
     components: {
+        CnSolutionFileCategoryForm,
         CnSolutionFileCategory,
-        CnTitle
+        CnTitle,
+        CnModal
     },
     setup(){
         const isAdmin = computed(() => store.getters['login/onlyAdmin']);
         const solutionFileCategories = ref(new Array<SolutionFileCategoryVM>());
+        const showModalAddCategory = ref(false);
+        const solutionFileCategoriesHtml = ref();
 
-        const solutionFileCategoryName = ref('');
-        const icon = ref<File>();
-
-        const changeIcon = (event: any) => {
-            icon.value = event.target.files[0];
+        const solutionFileCategoryIds = () => {
+            return solutionFileCategories.value.map(solutionFileCategory => solutionFileCategory.getSolutionFileCategoryId());
         };
 
-        const submitAddSolutionFileCategory = async() => {
-            if(!solutionFileCategoryName.value || !icon.value || !icon.value.name){
-                alert('Veuillez remplir tout le formulaire');
-                return;
-            }
+        const showModal = () => {
+            showModalAddCategory.value = true;
+        };
 
-            const formData = new FormData();
-            formData.append('file', icon.value, icon.value.name);
-            formData.append('categoryName', solutionFileCategoryName.value);
-            const response = await axiosCn.post('/admin/solutionFileCategory', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+        if(isAdmin.value) {
+            onMounted(() => {
+                new Sortable(solutionFileCategoriesHtml.value, {
+                    onEnd: async (evt) => {
+                        if (evt.oldIndex === undefined || evt.newIndex === undefined) {
+                            return;
+                        }
+
+                        const solutionFileCategoryIdsLocal = solutionFileCategoryIds();
+                        const element = solutionFileCategoryIdsLocal[evt.oldIndex];
+                        solutionFileCategoryIdsLocal.splice(evt.oldIndex, 1);
+                        solutionFileCategoryIdsLocal.splice(evt.newIndex, 0, element);
+                        const response = await axiosCn.put('/reorderSolutionFileCategory', {
+                            solutionFileCategoryIds: solutionFileCategoryIdsLocal
+                        });
+                        if (response.status === 200) {
+                            await getSolutionFileCategories();
+                        }
+                    }
+                });
             });
-            if(response.status === 200){
-                await getSolutionFileCategories();
-                icon.value = undefined;
-                solutionFileCategoryName.value = '';
-            }
-        };
+        }
 
         const getSolutionFileCategories = async () => {
             solutionFileCategories.value = await new SolutionFileCategoryRequest().querySolutionFileCategories();
+            showModalAddCategory.value = false;
         };
 
         getSolutionFileCategories();
@@ -88,11 +90,10 @@ export default defineComponent({
         return{
             solutionFileCategories,
             isAdmin,
-            submitAddSolutionFileCategory,
-            solutionFileCategoryName,
-            icon,
-            changeIcon,
-            getSolutionFileCategories
+            getSolutionFileCategories,
+            showModalAddCategory,
+            showModal,
+            solutionFileCategoriesHtml
         }
     }
 })
@@ -103,54 +104,19 @@ h2 {
     font-family: 'Ace Sans', serif;
 }
 
-.formAddSolutionFileCategory{
-    margin-top: 20px;
+h3{
     margin-bottom: 20px;
-}
-
-.inputIcon input{
-    display: none;
-}
-
-.labelName{
-    display: block;
-    margin-bottom: 20px;
-}
-
-.labelName span{
-    display: block;
-}
-
-.pickFile{
-    display: inline-block;
-    padding: 2px;
-    border: solid 1px #2e3092;
-}
-
-.formTitle{
-    font-size: x-large;
-    margin-bottom: 10px;
-}
-
-.inputIcon{
-    cursor: pointer;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-
-.spanIconName{
-    margin-top: 2px;
-    display: block;
 }
 
 .btnAddCategory{
     display: block;
     padding: 10px;
-    border: solid 1px #2E3092;
+    border: none;
     border-radius: 5px;
     color: white;
-    background-color: #2E3092;
+    background-color: orangered;
     cursor: pointer;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 </style>

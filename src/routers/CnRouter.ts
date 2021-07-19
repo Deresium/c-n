@@ -1,3 +1,4 @@
+/*
 import Invitation from "../models/Invitation";
 import express from "express";
 import Guest from "../models/Guest";
@@ -58,4 +59,4 @@ routerCn.post('/cn/contact', async(req, res)=> {
     }
 });
 
-export default routerCn;
+export default routerCn;*/

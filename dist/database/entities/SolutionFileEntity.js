@@ -15,6 +15,12 @@ class SolutionFileEntity extends sequelize_1.Model {
     getDescription() {
         return this.description;
     }
+    getSolutionFileCategoryId() {
+        return this.solutionFileCategoryId;
+    }
+    getOrder() {
+        return this.order;
+    }
 }
 exports.default = SolutionFileEntity;
 SolutionFileEntity.init({

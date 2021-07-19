@@ -2,58 +2,45 @@
     <div class="solutionFileCategory">
         <div class="title">
             <img class="imgIcon" :src="urlIcon" alt="icon"/>
-            <p>{{ solutionFileCategory.getName() }}</p>
-            <button class="btnAdmin btnDelete" v-if="isAdmin" @click="confirmDeleteSolutionFileCategory">Supprimer
-            </button>
-            <button class="btnAdmin btnConfirm" v-if="isAdmin && confirmDelete" @click="deleteSolutionFileCategory">
-                Confirmer
-            </button>
+            <p class="title">{{ solutionFileCategory.getName() }}</p>
+            <button class="btnShow btnClick" @click="switchSolutionVisibility">{{ txtButtonVisibility }}</button>
+            <button class="btnUpdateAdmin btnClick" v-if="isAdmin" @click="showModal">Modifier</button>
+            <CnModal v-model="showModalUpdate">
+                <CnSolutionFileCategoryForm :solution-file-category="solutionFileCategory" @refresh="refreshView"/>
+            </CnModal>
         </div>
-        <div class="solutionFiles">
-            <div
+        <div v-if="solutionsVisibility" class="solutionFiles" ref="solutionFiles">
+            <CnSolutionFile
                 v-for="solutionFile in solutionFileCategory.getSolutionFiles()"
                 :key="solutionFile.getSolutionFileId()"
-            >
-                {{ solutionFile.getTitle() }}
-            </div>
+                :solution-file="solutionFile"
+                :id-solution-file-category="solutionFileCategory.getSolutionFileCategoryId()"
+                @refresh="refreshView"
+            />
         </div>
-        <button class="btnClick btnShowAdd" v-if="isAdmin && !displayFormAdd" @click="showFormAdd">Ajouter une fiche solution</button>
-        <form
-            v-if="isAdmin && displayFormAdd"
-            class="formAddSolutionFile"
-            @submit.prevent="submitAddSolutionFile"
-            novalidate="novalidate"
-        >
-            <p class="title">Ajouter une fiche solution</p>
-            <label>
-                <span>Titre</span>
-                <input type="text" v-model="title"/>
-            </label>
-            <label class="labelDescription">
-                <span>Description</span>
-                <textarea v-model="description"/>
-            </label>
-            <div>
-                <label class="labelPdfFile">
-                    <input type="file" @change="changePdfFile"/>
-                    <span class="spanPdf pickPdfFile">Choisir un fichier</span>
-                    <span class="spanBlock" v-if="pdfFile && pdfFile.name">{{ pdfFile.name }}</span>
-                </label>
-            </div>
-            <div>
-                <button class="btnClick btnAddSolutionFile" type="submit">Ajouter une fiche solution</button>
-            </div>
-        </form>
+        <CnModal v-model="modalAddSolutionFile">
+            <CnSolutionFileForm
+                :id-solution-file-category="solutionFileCategory.getSolutionFileCategoryId()"
+                @refresh="refreshView(false)"
+            />
+        </CnModal>
+        <button class="btnClick btnShowAdd" v-if="isAdmin" @click="showModalAddSolutionFile">Ajouter une fiche solution</button>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, ref} from "vue";
+import {defineComponent, computed, ref, watch} from "vue";
 import SolutionFileCategoryVM from "@/business/models/SolutionFileCategoryVM";
 import store from "@/store/store";
+import CnSolutionFile from "@/components/solutionfiles/CnSolutionFile.vue";
+import CnModal from "@/components/commons/CnModal.vue";
+import CnSolutionFileCategoryForm from "@/components/solutionfiles/CnSolutionFileCategoryForm.vue";
+import CnSolutionFileForm from "@/components/solutionfiles/CnSolutionFileForm.vue";
+import Sortable from "sortablejs";
 import axiosCn from "@/axios/axiosCn";
 
 export default defineComponent({
+    components: {CnSolutionFileForm, CnSolutionFileCategoryForm, CnModal, CnSolutionFile},
     emits: ['refresh'],
     props: {
         solutionFileCategory: {
@@ -62,67 +49,81 @@ export default defineComponent({
         }
     },
     setup(props, context) {
-        const urlIcon = computed(() => `${process.env.VUE_APP_URL_CN}/solutionFileCategory/${props.solutionFileCategory.getSolutionFileCategoryId()}/icon`);
+        const time = ref(new Date().getTime());
+        const urlIcon = computed(() => `${process.env.VUE_APP_URL_CN}/solutionFileCategory/${props.solutionFileCategory.getSolutionFileCategoryId()}/icon?time=${time.value}`);
         const isAdmin = computed(() => store.getters['login/onlyAdmin']);
-        const confirmDelete = ref(false);
-        const displayFormAdd = ref(false);
-
-        const title = ref('');
-        const description = ref('');
-        const pdfFile = ref<File>();
-
-        const confirmDeleteSolutionFileCategory = () => {
-            confirmDelete.value = true;
-        };
-
-        const deleteSolutionFileCategory = async () => {
-            const response = await axiosCn.delete(`/solutionFileCategory/${props.solutionFileCategory.getSolutionFileCategoryId()}`);
-            if (response.status === 200) {
-                context.emit('refresh')
+        const solutionFiles = ref();
+        const solutionsVisibility = ref(false);
+        const txtButtonVisibility = computed(() => {
+            if(solutionsVisibility.value){
+                return 'Masquer les fiches solutions'
+            }else{
+                return 'Afficher les fiches solutions'
             }
+        });
+
+        const modalAddSolutionFile = ref(false);
+        const showModalUpdate = ref(false);
+
+        const showModal = () => {
+            showModalUpdate.value = true;
         };
 
-        const submitAddSolutionFile = async () => {
-            if (!title.value || !description.value || !pdfFile.value) {
-                alert('Veuillez remplir le formulaire');
+        const showModalAddSolutionFile = () => {
+            modalAddSolutionFile.value = true;
+        };
+
+        const refreshView = (refreshPicture=true) => {
+            showModalUpdate.value = false;
+            modalAddSolutionFile.value = false;
+            if(refreshPicture) {
+                time.value = new Date().getTime();
+            }
+            context.emit('refresh');
+        };
+
+        const switchSolutionVisibility = () => {
+            solutionsVisibility.value = !solutionsVisibility.value
+        };
+
+        watch(solutionFiles, () => {
+            if(!isAdmin.value || !solutionFiles.value){
                 return;
             }
 
-            const formData = new FormData();
-            formData.append('file', pdfFile.value, pdfFile.value.name);
-            formData.append('title', title.value);
-            formData.append('description', description.value);
+            new Sortable(solutionFiles.value, {
+                onEnd: async (evt) => {
+                    if (evt.oldIndex === undefined || evt.newIndex === undefined) {
+                        return;
+                    }
 
-            const response = await axiosCn.post(`/solutionFileCategory/${props.solutionFileCategory.getSolutionFileCategoryId()}/solutionFile`, formData);
-            if(response.status === 200){
-                context.emit('refresh');
-                title.value = '';
-                description.value = '';
-                pdfFile.value = undefined;
-            }
-        };
-
-        const changePdfFile = (event: any) => {
-            pdfFile.value = event.target.files[0];
-        };
-
-        const showFormAdd = () => {
-            displayFormAdd.value = true;
-        };
+                    const solutionFileIds = props.solutionFileCategory.getSolutionFilesIds();
+                    const element = solutionFileIds[evt.oldIndex];
+                    solutionFileIds.splice(evt.oldIndex, 1);
+                    solutionFileIds.splice(evt.newIndex, 0, element);
+                    const response = await axiosCn.put('/reorderSolutionFile', {
+                        solutionFileIds
+                    });
+                    if (response.status === 200) {
+                        context.emit('refresh');
+                    }
+                }
+            });
+        });
 
         return {
             urlIcon,
             isAdmin,
-            confirmDelete,
-            deleteSolutionFileCategory,
-            confirmDeleteSolutionFileCategory,
-            submitAddSolutionFile,
-            title,
-            description,
-            pdfFile,
-            changePdfFile,
-            showFormAdd,
-            displayFormAdd
+            showModal,
+            showModalUpdate,
+            refreshView,
+            time,
+            modalAddSolutionFile,
+            showModalAddSolutionFile,
+            solutionFiles,
+            switchSolutionVisibility,
+            solutionsVisibility,
+            txtButtonVisibility
         }
     }
 })
@@ -130,7 +131,8 @@ export default defineComponent({
 
 <style scoped>
 .solutionFileCategory {
-    margin-bottom: 20px;
+    margin-bottom: 70px;
+    margin-top: 50px;
 }
 
 .imgIcon {
@@ -141,54 +143,9 @@ export default defineComponent({
 .title {
     display: flex;
     align-items: center;
+    margin-right: 10px;
 }
 
-.btnAdmin {
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-.btnDelete {
-    background-color: red;
-    margin-left: 20px;
-}
-
-.btnConfirm {
-    background-color: green;
-    margin-left: 20px;
-}
-
-.formAddSolutionFile {
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-}
-
-.formAddSolutionFile span {
-    display: block;
-}
-
-.labelPdfFile input {
-    display: none;
-}
-
-.labelPdfFile > .pickPdfFile {
-    display: inline-block;
-}
-
-.pickPdfFile {
-    cursor: pointer;
-    padding: 10px;
-    border: 1px solid #2E3092;
-    margin-bottom: 5px;
-}
-
-.btnAddSolutionFile{
-    margin-top: 20px;
-}
 
 .btnShowAdd{
     margin-top: 10px;
@@ -197,15 +154,14 @@ export default defineComponent({
 .btnClick{
     color: white;
     padding: 10px;
-    background-color: #2E3092;
+    background-color: orangered;
     border-radius: 5px;
     border: none;
     cursor: pointer;
 }
 
-.labelDescription{
-    margin-top: 20px;
-    margin-bottom: 20px;
+button.btnShow{
+    background-color: #2E3092;
 }
 
 .formAddSolutionFile .title{
@@ -215,5 +171,18 @@ export default defineComponent({
 
 input, textarea{
     padding: 2px;
+}
+
+.solutionFiles{
+    margin-left: 5px;
+}
+
+.title{
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.btnUpdateAdmin{
+    margin-left: 10px;
 }
 </style>

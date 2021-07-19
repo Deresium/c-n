@@ -2,6 +2,7 @@ import sgMail from '@sendgrid/mail'
 import InvitationDocument from "./interfaces/InvitationDocument";
 import GuestDocument from "./interfaces/GuestDocument";
 import ContactDocument from "./interfaces/ContactDocument";
+import ContactDS from "./business/models/contact/ContactDS";
 
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 const to = 'nicolas.steinbusch@c-n.be';
@@ -16,15 +17,15 @@ const sendNewInvitationMail = async(invitation: InvitationDocument)=>{
     });
 };
 
-const sendContactMail = async(contact: ContactDocument) => {
+const sendContactMail = async(contact: ContactDS) => {
     await sgMail.send({
         to,
         from,
-        subject: `Nouveau message de ${contact.name} ${contact.firstName}`,
+        subject: `Nouveau message de ${contact.getName()} ${contact.getFirstName()}`,
         text: getContactText(contact, '\n'),
         html: getContactText(contact,'<br/>')
     });
-}
+};
 
 function guestListString(guestList: GuestDocument[], separator: string): string{
     let returnString = '';
@@ -44,9 +45,9 @@ function getNewInvitationText(invitation: InvitationDocument, separator: string)
     ${guestListString(invitation.guestList, separator)}`
 }
 
-function getContactText(contact: ContactDocument, separator: string): string{
-    return `Vous avez reçu un nouveau message de ${contact.name} ${contact.firstName} ( ${(contact.company)? contact.company: 'société non spécifiée'} ) - ${contact.email}: ${separator}
-    ${contact.request.replace('\n', separator)}`;
+function getContactText(contact: ContactDS, separator: string): string{
+    return `Vous avez reçu un nouveau message de ${contact.getName()} ${contact.getFirstName()} ( ${(contact.getCompany())? contact.getCompany(): 'société non spécifiée'} ) - ${contact.getEmail()}: ${separator}
+    ${contact.getMessage().replace('\n', separator)}`;
 }
 
 export {

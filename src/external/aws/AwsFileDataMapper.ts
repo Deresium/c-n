@@ -8,11 +8,11 @@ export default class AwsFileDataMapper implements IFileDataGateway{
         this.awsOperations = awsOperations;
     }
 
-    async deleteIconSolutionCategory(solutionFileCategoryId: string) {
+    async deleteIconSolutionCategory(solutionFileCategoryId: number) {
         await this.awsOperations.deleteFile(`icons/${solutionFileCategoryId}`);
     }
 
-    async deleteSolutionFile(solutionFileId: string) {
+    async deleteSolutionFile(solutionFileId: number) {
         await this.awsOperations.deleteFile(`solution/${solutionFileId}`);
     }
 
