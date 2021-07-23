@@ -74,7 +74,7 @@ module.exports = {
                       type: Sequelize.STRING(256),
                       allowNull: false
                   },
-                  sorting: {
+                  order: {
                       type: Sequelize.INTEGER,
                       allowNull: false
                   },
@@ -100,13 +100,14 @@ module.exports = {
                       type: Sequelize.STRING(4000),
                       allowNull: false
                   },
-                  sorting: {
+                  order: {
                       type: Sequelize.INTEGER,
                       allowNull: false
                   },
                   solutionFileCategoryId: {
                       type: Sequelize.INTEGER,
                       allowNull: false,
+                      onDelete: 'cascade',
                       references:{
                           model: {
                               tableName: 'SolutionFileCategories',
