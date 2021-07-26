@@ -17,12 +17,8 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import CnTitle from "@/components/commons/CnTitle.vue";
 
 export default defineComponent({
-    components:{
-      CnTitle
-    },
     props:{
         postUrl:{
             type: String,
