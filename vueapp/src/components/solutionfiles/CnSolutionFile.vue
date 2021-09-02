@@ -6,8 +6,7 @@
         </div>
         <p v-html="description" class="description"></p>
         <div class="btnActions">
-            <a class="btnPdf btnPreview" :href="urlPdf(false)" :download="encodeURIComponent(solutionFile.getTitle())"
-               target="_blank">Preview</a>
+            <a class="btnPdf btnPreview" :href="urlPdf(false)" target="_blank">Preview</a>
             <a class="btnPdf" :href="urlPdf(true)">Télécharger</a>
         </div>
     </div>
