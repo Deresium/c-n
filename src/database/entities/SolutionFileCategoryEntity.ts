@@ -44,7 +44,7 @@ SolutionFileCategoryEntity.init({
         allowNull: false
     }
 },{
-    tableName: 'SolutionFileCategories',
+    tableName: 'solutionfilecategories',
     sequelize: DatabaseSingleton.getInstance().getSequelize()
 });
 

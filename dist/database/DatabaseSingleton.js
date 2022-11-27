@@ -21,19 +21,21 @@ class DatabaseSingleton {
             };
         }
         this.sequelize = new sequelize_1.Sequelize(process.env.DATABASE_URL, {
-            dialectOptions
+            dialectOptions,
+            schema: 'cnschema'
         });
     }
     static getInstance() {
         if (!this.instance) {
             this.instance = new DatabaseSingleton();
+            this.instance.testConnect();
         }
         return this.instance;
     }
     getSequelize() {
         return this.sequelize;
     }
-    connect() {
+    testConnect() {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('try to connect...');
             try {

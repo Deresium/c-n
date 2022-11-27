@@ -52,6 +52,6 @@ SolutionFileEntity.init({
         allowNull: false
     }
 },{
-    tableName: 'SolutionFiles',
+    tableName: 'solutionfiles',
     sequelize: DatabaseSingleton.getInstance().getSequelize()
 });

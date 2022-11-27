@@ -36,7 +36,7 @@ SolutionFileCategoryEntity.init({
         allowNull: false
     }
 }, {
-    tableName: 'SolutionFileCategories',
+    tableName: 'solutionfilecategories',
     sequelize: DatabaseSingleton_1.default.getInstance().getSequelize()
 });
 SolutionFileCategoryEntity.hasMany(SolutionFileEntity_1.default, { sourceKey: 'solutionFileCategoryId', foreignKey: 'solutionFileCategoryId', as: 'solutionFiles' });

@@ -41,7 +41,7 @@
         },
         setup(){
             const loader = new Loader({
-                apiKey: "AIzaSyCrW4gzW8z1efSoknWXNkCmgXIkOz3oijw",
+                apiKey: "AIzaSyC7EI6usb6H2-fkWcjNfp3wSkK2_FF84Co",
                 version: "weekly"
             });
 

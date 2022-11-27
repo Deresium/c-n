@@ -46,7 +46,7 @@ SolutionFileEntity.init({
         allowNull: false
     }
 }, {
-    tableName: 'SolutionFiles',
+    tableName: 'solutionfiles',
     sequelize: DatabaseSingleton_1.default.getInstance().getSequelize()
 });
 //# sourceMappingURL=SolutionFileEntity.js.map

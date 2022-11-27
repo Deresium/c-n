@@ -40,7 +40,7 @@ UserEntity.init({
         allowNull: true
     }
 }, {
-    tableName: 'Users',
+    tableName: 'users',
     sequelize: DatabaseSingleton_1.default.getInstance().getSequelize()
 });
 //# sourceMappingURL=UserEntity.js.map

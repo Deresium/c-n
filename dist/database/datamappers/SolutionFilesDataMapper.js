@@ -58,10 +58,15 @@ class SolutionFilesDataMapper {
     }
     addSolutionFileCategory(name, order) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield SolutionFileCategoryEntity_1.default.create({
-                name,
-                order
-            });
+            try {
+                return yield SolutionFileCategoryEntity_1.default.create({
+                    name,
+                    order
+                });
+            }
+            catch (error) {
+                console.error(error);
+            }
         });
     }
     addSolutionFile(solutionFile) {

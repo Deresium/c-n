@@ -45,6 +45,6 @@ UserEntity.init({
         allowNull: true
     }
 },{
-    tableName: 'Users',
+    tableName: 'users',
     sequelize: DatabaseSingleton.getInstance().getSequelize()
 });

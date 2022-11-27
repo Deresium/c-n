@@ -37,6 +37,6 @@ ContactEntity.init({
         allowNull: false,
     }
 },{
-    tableName: 'Contacts',
+    tableName: 'contacts',
     sequelize: DatabaseSingleton.getInstance().getSequelize()
 });

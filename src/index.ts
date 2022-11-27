@@ -4,8 +4,6 @@ import DatabaseSingleton from "./database/DatabaseSingleton";
 const port = Number(process.env.PORT);
 const host = process.env.DNS_NAME;
 
-DatabaseSingleton.getInstance().connect().then(() => console.log('connect to DB from Index'));
-
 const expressApp = AppSingleton.getInstance().getExpressApp();
 if (process.env.NODE_ENV === 'production') {
     expressApp.listen(process.env.PORT, () => {

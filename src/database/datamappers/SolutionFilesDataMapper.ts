@@ -43,10 +43,14 @@ export default class SolutionFilesDataMapper implements ISolutionFileDataGateway
     }
 
     async addSolutionFileCategory(name: string, order: number): Promise<SolutionFileCategoryEntity> {
-        return await SolutionFileCategoryEntity.create({
-            name,
-            order
-        })
+        try {
+            return await SolutionFileCategoryEntity.create({
+                name,
+                order
+            })
+        }catch(error){
+            console.error(error);
+        }
     }
 
     async addSolutionFile(solutionFile: SolutionFileDS): Promise<SolutionFileEntity> {

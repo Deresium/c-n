@@ -35,7 +35,7 @@ ContactEntity.init({
         allowNull: false,
     }
 }, {
-    tableName: 'Contacts',
+    tableName: 'contacts',
     sequelize: DatabaseSingleton_1.default.getInstance().getSequelize()
 });
 //# sourceMappingURL=ContactEntity.js.map

@@ -24,7 +24,6 @@ class ExtractTokenMiddleware extends ApplicationMiddleware_1.default {
                 // @ts-ignore
                 req.userRole = Roles_1.default[decrypt.role];
                 req.userId = decrypt.userId;
-                req.customerId = decrypt.customerId;
                 const user = new UserLoginVM_1.default(req.userId, req.userRole);
                 const cookieGenerator = new CookiesGenerator_1.default(user);
                 res.setHeader('Set-Cookie', [cookieGenerator.getSignatureCookie(), cookieGenerator.getPayloadCookie()]);

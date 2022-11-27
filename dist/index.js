@@ -4,10 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const AppSingleton_1 = __importDefault(require("./AppSingleton"));
-const DatabaseSingleton_1 = __importDefault(require("./database/DatabaseSingleton"));
 const port = Number(process.env.PORT);
 const host = process.env.DNS_NAME;
-DatabaseSingleton_1.default.getInstance().connect().then(() => console.log('connect to DB from Index'));
 const expressApp = AppSingleton_1.default.getInstance().getExpressApp();
 if (process.env.NODE_ENV === 'production') {
     expressApp.listen(process.env.PORT, () => {

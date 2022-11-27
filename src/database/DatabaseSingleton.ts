@@ -13,13 +13,15 @@ export default class DatabaseSingleton{
             }
         }
         this.sequelize = new Sequelize(process.env.DATABASE_URL, {
-            dialectOptions
+            dialectOptions,
+            schema: 'cnschema'
         })
     }
 
     public static getInstance(): DatabaseSingleton{
         if(!this.instance) {
             this.instance = new DatabaseSingleton();
+            this.instance.testConnect();
         }
         return this.instance;
     }
@@ -28,7 +30,7 @@ export default class DatabaseSingleton{
         return this.sequelize;
     }
 
-    async connect(){
+    async testConnect(){
         console.log('try to connect...');
         try {
             await this.sequelize.authenticate();
