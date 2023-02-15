@@ -9,6 +9,12 @@
         var wifi4euNetworkIdentifier = 'wIpyJ01C2AeQZfneKOCuz';
         var wifi4euLanguage = 'fr';
 
+        const domain = window.location.hostname;
+        const isHouffalize = domain.split('.')[0].toLowerCase() === 'achouffalize';
+        if(isHouffalize){
+            var wifi4euNetworkIdentifier = 'dPGL54YSPxlPEe1uHmJpN';
+        }
+
         const params = new URLSearchParams(window.location.search);
         const sip = params.get('sip');
         const sshTunnelStatus = parseInt(params.get('sshTunnelStatus'));
