@@ -75,44 +75,56 @@
                     <a href="https://www.cisco.com/" rel="noopener" target="_blank">
                         <img src="../assets/brands/cisco.svg" alt="cisco"/>
                     </a>
-                    <a href="https://www.eaton.com/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/eaton.png" alt="eaton"/>
+                    <a href="https://www.fortinet.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/fortinet.png" alt="fortinet"/>
                     </a>
-                    <a href="https://www.ekahau.com/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/ekahau.png" alt="ekahau"/>
+                    <a href="https://www.phoenixcontact.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/phoenix_contact.png" alt="phoenix contact"/>
                     </a>
                     <a href="https://www.rdm.com/" rel="noopener" target="_blank">
                         <img src="../assets/brands/R&M.png" alt="R&M"/>
                     </a>
-                    <a href="https://fr.commscope.com/ruckus/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/ruckus.png" alt="ruckus"/>
+                    <a href="https://www.rittal.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/rittal.png" alt="rittal"/>
                     </a>
-                    <a href="https://www.milestonesys.com/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/milestone.png" alt="milestone"/>
-                    </a>
-                    <a href="https://patchbox.com/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/patchbox.png" alt="patchbox"/>
+                    <a href="https://www.eaton.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/eaton.png" alt="eaton"/>
                     </a>
                     <a href="https://www.excel-networking.com/" rel="noopener" target="_blank">
                         <img src="../assets/brands/excel.png" alt="excel"/>
                     </a>
-                    <a href="https://www.minkels.com/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/minkels.png" alt="minkels"/>
-                    </a>
-                    <a href="https://www.2n.cz" rel="noopener" target="_blank">
-                        <img src="../assets/brands/2N.png" alt="2N"/>
-                    </a>
-                    <a href="https://vanderbiltindustries.com/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/vanderbilt.png" alt="vanderbilt"/>
+                    <a href="https://patchbox.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/patchbox.png" alt="patchbox"/>
                     </a>
                     <a href="https://www.assmann.com/" rel="noopener" target="_blank">
                         <img src="../assets/brands/digitus.png" alt="digitus"/>
                     </a>
+                    <a href="https://www.ekahau.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/ekahau.png" alt="ekahau"/>
+                    </a>
+                    <a href="https://fr.commscope.com/ruckus/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/ruckus.png" alt="ruckus"/>
+                    </a>
                     <a href="https://www.ui.com/" rel="noopener" target="_blank">
                         <img src="../assets/brands/ubiquiti.png" alt="ubiquiti"/>
                     </a>
-                    <a href="https://www.dahuasecurity.com/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/dahua.png" alt="dahua"/>
+                    <a href="https://www.milestonesys.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/milestone.png" alt="milestone"/>
+                    </a>
+                    <a href="https://www.genetec.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/genetec.png" alt="genetec"/>
+                    </a>
+                    <a href="https://hanwha-security.eu/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/hanwha.png" alt="hanwha"/>
+                    </a>
+                    <a href="https://vanderbiltindustries.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/vanderbilt.png" alt="vanderbilt"/>
+                    </a>
+                    <a href="https://www.assaabloy.com/" rel="noopener" target="_blank">
+                        <img src="../assets/brands/assa_abloy.png" alt="assa abloy"/>
+                    </a>
+                    <a href="https://www.2n.cz" rel="noopener" target="_blank">
+                        <img src="../assets/brands/2N.png" alt="2N"/>
                     </a>
                 </div>
             </div>
