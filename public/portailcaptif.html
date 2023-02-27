@@ -38,11 +38,12 @@
                 proxy,
                 uip,
                 client_mac: clientMac,
-            }).then(() => {
-                window.location.replace("https://www.c-n.be");
-            }).catch((error) => {
-                console.log(error);
-            })
+            });
+        };
+        postFunction();
+
+        const redirectFunction = () => {
+            window.location.replace("https://www.c-n.be");
         }
     </script>
     <script type="text/javascript" src="https://collection.wifi4eu.ec.europa.eu/wifi4eu.min.js"></script>
@@ -179,6 +180,6 @@
 </body>
 <script>
     const button = document.getElementById('clickContinue');
-    button.addEventListener('click', postFunction);
+    button.addEventListener('click', redirectFunction);
 </script>
 </html>
