@@ -11,7 +11,7 @@
         //var selftestModus = true;
 
         const domain = window.location.hostname;
-        const isHouffalize = domain.split('.')[0].toLowerCase() === 'achouffalize';
+        const isHouffalize = domain.split('.')[0].toLowerCase() === 'achouffalize' || domain.split('.')[1].toLowerCase() === 'achouffalize';
         if(isHouffalize){
             var wifi4euNetworkIdentifier = 'dPGL54YSPxlPEe1uHmJpN';
         }
