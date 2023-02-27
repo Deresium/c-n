@@ -32,18 +32,26 @@
         else
             urlToCall = `https://${apIP}:9998/SubscriberPortal/hotspotlogin`;
 
-        const postFunction = () => {
-            axios.post(urlToCall, {
-                url,
-                proxy,
-                uip,
-                client_mac: clientMac,
-            });
-        };
-        postFunction();
+        let postFunction;
+        if(!isHouffalize){
+            postFunction = () => {
+                axios.post(urlToCall, {
+                    url,
+                    proxy,
+                    uip,
+                    client_mac: clientMac,
+                }).then(() => {
+                    window.location.replace("https://www.c-n.be");
+                }).catch((error) => {
+                    console.log(error);
+                })
+            }
+        }
 
-        const redirectFunction = () => {
-            window.location.replace("https://www.c-n.be");
+        if(isHouffalize){
+            postFunction = () => {
+                window.location.replace("https://www.c-n.be");
+            }
         }
     </script>
     <script type="text/javascript" src="https://collection.wifi4eu.ec.europa.eu/wifi4eu.min.js"></script>
@@ -180,6 +188,6 @@
 </body>
 <script>
     const button = document.getElementById('clickContinue');
-    button.addEventListener('click', redirectFunction);
+    button.addEventListener('click', postFunction);
 </script>
 </html>
