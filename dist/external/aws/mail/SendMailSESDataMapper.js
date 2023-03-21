@@ -33,8 +33,8 @@ class SendMailSESDataMapper {
                     }
                 },
                 Destination: {
-                    //ToAddresses: ['nicolas.steinbusch@c-ne.be']
-                    ToAddresses: ['dimitri.steinbusch@hotmail.com']
+                    ToAddresses: ['nicolas.steinbusch@c-n.be']
+                    //ToAddresses: ['dimitri.steinbusch@hotmail.com']
                 },
                 Source: 'info@c-n.be'
             });
@@ -75,14 +75,14 @@ class SendMailSESDataMapper {
                     }
                 },
                 Destination: {
-                    //ToAddresses: ['nicolas.steinbusch@c-ne.be']
-                    ToAddresses: ['dimitri.steinbusch@hotmail.com']
+                    ToAddresses: ['annick.steinbusch@c-n.be']
+                    //ToAddresses: ['dimitri.steinbusch@hotmail.com']
                 },
                 Source: 'info@c-n.be'
             });
             try {
                 yield client.send(command);
-                console.log(`mail envoyé à nicolas.steinbusch@c-n.be`);
+                console.log(`mail envoyé à annick.steinbusch@c-n.be`);
             }
             catch (exception) {
                 console.error(exception);
