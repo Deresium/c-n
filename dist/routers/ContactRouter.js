@@ -25,9 +25,6 @@ class ContactRouter extends ApplicationRouter_1.default {
             const contact = new ContactDS_1.default(contactJson.name, contactJson.firstName, contactJson.email, contactJson.company, contactJson.request);
             yield this.contactRequester.addContact(contact);
             res.send();
-            /*const contact = await Contact.create(req.body.contact);
-            await sendContactMail(contact);
-            res.status(200).send(contact);*/
         }));
     }
 }

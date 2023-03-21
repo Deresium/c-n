@@ -1,5 +1,4 @@
 import ISolutionFileRequester from "../requesters/ISolutionFileRequester";
-import IFileDataGateway from "../../external/aws/IFileDataGateway";
 import ISolutionFileDataGateway from "../../database/datagateways/ISolutionFileDataGateway";
 import SolutionFileCategoryEntity from "../../database/entities/SolutionFileCategoryEntity";
 import SolutionFileCategoryVM from "../models/solutionfile/viewmodels/SolutionFileCategoryVM";
@@ -7,6 +6,7 @@ import SolutionFileVM from "../models/solutionfile/viewmodels/SolutionFileVM";
 import SolutionFileEntity from "../../database/entities/SolutionFileEntity";
 import SolutionFileDS from "../models/solutionfile/datastores/SolutionFileDS";
 import SolutionFileUpdateDS from "../models/solutionfile/datastores/SolutionFileUpdateDS";
+import IFileDataGateway from "../../external/aws/files/IFileDataGateway";
 
 export default class SolutionFileFacade implements ISolutionFileRequester {
     private fileDataGateway: IFileDataGateway;

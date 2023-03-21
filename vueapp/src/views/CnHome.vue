@@ -15,12 +15,25 @@
         <div class="cnMain">
             <div class="inCover">
                 <h3 class="phone">A la une</h3>
-                <img src="../assets/newsMilestone.png" alt="news_pic"/>
+                <img src="../assets/Photo_Page_Accueil.png" alt="news_pic"/>
                 <div class="inCoverContent">
                     <h3 class="desktop">A la une</h3>
-                    <h4>Cable & Network officiellement reconnu Milestone Gold Channel Partner.</h4>
-                    <p>Grâce à notre expérience et notre expertise dans la conception de solutions de surveillance avec le VMS Milestone XProtect, nous sommes officiellement reconnus Milestone Gold Channel Partner.</p>
-                    <p>N'hésitez pas à vous rendre sur <router-link class="linkToContact" to="/services/security">cette page</router-link> ou à nous contacter pour en apprendre davantage sur nos solutions en sécurisation des bâtiments.</p>
+                    <h4>Infrastructure Solution Day - Jeudi 27 Avril 2023</h4>
+                    <div class="infraDayInfo">
+                        <p><img class="iconInfra" src="../assets/icons/calendar.svg" alt="calendar icon"/> Jeudi 27 avril 2023 - de 10h à 18h</p>
+                        <p><img class="iconInfra" src="../assets/icons/placeholder.svg" alt="placeholder icon"/> Avenue Albert 1er, 14 - 4500 Huy</p>
+                        <p><img class="iconInfra" src="../assets/icons/dinner.svg" alt="dinner icon"/> Un buffet et une sélection de vins durant toute la journée</p>
+                        <p>
+                            <img class="iconInfra" src="../assets/icons/booth.svg" alt="booth icon"/>
+                            <span class="infoWithLink">
+                            Programme de la journée disponible sur
+                            <router-link class="programmeLink" :to="{name: 'programme'}">c-n.be/programme</router-link>
+                        </span>
+                        </p>
+                        <p>
+                            <router-link class="inscriptionLink" :to="{name: 'inscription'}">S'inscrire</router-link>
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -149,7 +162,7 @@ import {defineComponent, computed} from "vue";
 import store from "@/store/store";
 
 export default defineComponent({
-    setup(){
+    setup() {
         const userRole = computed(() => store.getters['login/getRole']);
         return {
             userRole
@@ -159,281 +172,307 @@ export default defineComponent({
 </script>
 
 <style scoped>
-    /* Header Title */
-    .divTitle{
-        margin-top: 2vh;
-        color: #FEFE00;
-        position: relative;
+/* Header Title */
+.divTitle {
+    margin-top: 2vh;
+    color: #FEFE00;
+    position: relative;
+}
+
+.fullTitle {
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+    transform: translate(0, -50%);
+}
+
+.hTitle {
+    font-size: x-large;
+    font-weight: 300;
+    font-family: 'Ace Sans', serif;
+}
+
+.hSubTitle {
+    font-size: large;
+    font-weight: 300;
+    font-family: 'Ace Sans', serif;
+}
+
+.heroImg {
+    width: 100%;
+    z-index: 0;
+}
+
+/* News */
+.inCover {
+    margin-top: 2vh;
+    color: #2E3092;
+}
+
+.btnSubscription {
+    margin-top: 2vh;
+    width: 50%;
+}
+
+.inCover img {
+    width: 60%;
+    margin-left: 20%;
+}
+
+h3 {
+    background-color: rgba(254, 254, 0, 0.75);
+    color: #2E3092;
+    text-align: center;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+h4 {
+    margin-bottom: 1vh;
+}
+
+a.linkToContact {
+    display: inline;
+    margin-left: 0;
+    font-weight: bold;
+    color: #2E3092;
+}
+
+/* Services */
+.divFour {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divFour > h3 {
+    width: 100%;
+}
+
+.mainFour {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.squareFour {
+    background-color: #2E3092;
+    display: block;
+    width: 50%;
+    text-align: center;
+    padding: 2vh;
+    margin-bottom: 2vh;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.squareFour > img {
+    height: 8vh;
+}
+
+.squareFour h4 {
+    color: #FEFE00;
+    font-size: large;
+}
+
+.projectSquare {
+    background-color: #FEFE00;
+}
+
+.projectSquare h4 {
+    color: #2E3092;
+}
+
+.btnShowAllProjects {
+    width: 70%;
+}
+
+.projectSquare > img {
+    width: 80%;
+    height: auto;
+}
+
+/*brands*/
+.divBrands {
+    margin-top: 5vh;
+}
+
+.brandsLogo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brandsLogo a {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brandsLogo img {
+    width: 90%;
+}
+
+div.divPartners {
+    display: flex;
+    justify-content: space-between;
+}
+
+.divPartners > a {
+    width: 45%;
+}
+
+.infraDayInfo p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.infraDayInfo img.iconInfra {
+    width: 25px;
+    height: 25px;
+    margin: 0 20px 0 0;
+}
+
+.infraDayInfo a.programmeLink, .infraDayInfo a.inscriptionLink{
+    display: inline;
+    margin-left: 0;
+}
+
+.inscriptionLink{
+    text-decoration: none;
+    color: white;
+    background-color: #2E3092;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+@media (min-width: 900px) {
+    .fullTitle > h1 {
+        font-size: 60px;
     }
 
-    .fullTitle{
-        position: absolute;
-        z-index: 1;
-        text-align: center;
-        top: 50%;
-        width: 100%;
-        transform: translate(0, -50%);
+    .fullTitle > h2 {
+        font-size: 40px;
     }
 
-    .hTitle{
-        font-size: x-large;
-        font-weight: 300;
-        font-family: 'Ace Sans',serif;
-    }
-
-    .hSubTitle{
+    .inCover {
+        display: flex;
         font-size: large;
-        font-weight: 300;
-        font-family: 'Ace Sans',serif;
+        align-items: flex-start;
     }
 
-    .heroImg{
-        width: 100%;
-        z-index: 0;
+    .inCover > img {
+        width: 20%;
+        margin-left: 0;
+        object-fit: contain;
+
     }
 
-    /* News */
-    .inCover{
-        margin-top: 2vh;
-        color: #2E3092;
-    }
-
-    .btnSubscription{
-        margin-top: 2vh;
-        width: 50%;
-    }
-
-    .inCover img{
+    .inCover > .inCoverContent {
         width: 60%;
-        margin-left: 20%;
     }
 
-    h3{
-        background-color: rgba(254, 254, 0, 0.75);
-        color: #2E3092;
-        text-align: center;
-        margin-bottom: 2vh;
-        margin-top: 1vh;
-        padding-top: 1vh;
-        padding-bottom: 1vh;
+    .inCover a {
+        margin-left: 2%;
     }
 
-    h4{
+    a.linkToContact {
+        display: inline;
+        margin-left: 0;
+    }
+
+    .inCover h3 {
+        text-align: left;
+        padding: 1% 0 1% 2%;
+        margin-top: 0;
         margin-bottom: 1vh;
     }
 
-    a.linkToContact{
-        display: inline;
-        margin-left: 0;
-        font-weight: bold;
-        color: #2E3092;
+    .inCover h4 {
+        padding-left: 2%;
+        margin-bottom: 0.5vh;
     }
 
-    /* Services */
-    .divFour{
-        margin-top: 5vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    h3 {
+        font-size: x-large;
     }
 
-    .divFour > h3{
-        width: 100%;
-    }
-
-    .mainFour{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-
-    .squareFour{
-        background-color: #2E3092;
-        display: block;
-        width: 50%;
-        text-align: center;
-        padding: 2vh;
-        margin-bottom: 2vh;
-        border-radius: 25px;
-        text-decoration: none;
-    }
-
-    .squareFour > img{
-        height: 8vh;
-    }
-
-    .squareFour h4{
-        color: #FEFE00;
+    h4, .squareFour h4 {
         font-size: large;
     }
 
-    .projectSquare{
-        background-color: #FEFE00;
+    .inCover p {
+        padding-left: 2%;
     }
 
-    .projectSquare h4{
-        color: #2E3092;
+    .btnSubscription {
+        z-index: 1;
+        position: relative;
     }
 
-    .btnShowAllProjects{
-        width: 70%;
+    .mainFour {
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
 
-    .projectSquare > img{
-        width: 80%;
+    .squareFour {
+        width: 20%;
+        padding: 2vh 0 2vh 0;
+        cursor: pointer;
+        transition-duration: 0.3s;
+    }
+
+    .squareFour:hover {
+        transform: scale(1.1, 1.1);
+    }
+
+    .squareFour > img {
+        height: 5vh;
+    }
+
+    .projectSquare > img {
+        width: 50%;
         height: auto;
     }
 
-    /*brands*/
-    .divBrands{
-        margin-top: 5vh;
+    .btnShowAllProjects {
+        width: 20%;
     }
 
-    .brandsLogo{
+    .brandsLogo {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        flex-wrap: nowrap;
         align-items: center;
+        width: 100%;
+        overflow-x: scroll;
     }
 
-    .brandsLogo a{
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .brandsLogo a {
+        display: block;
+        min-width: 15%;
     }
 
-    .brandsLogo img{
-        width: 90%;
+    .brandsLogo a:not(:first-child) {
+        margin-left: 3%;
     }
 
-    div.divPartners{
-        display: flex;
-        justify-content: space-between;
+    div.divPartners {
+        justify-content: space-around;
     }
 
-    .divPartners > a{
-        width: 45%;
+    .divPartners > a {
+        width: 20%;
     }
-
-    @media (min-width: 900px) {
-        .fullTitle > h1{
-            font-size: 60px;
-        }
-
-        .fullTitle > h2 {
-            font-size: 40px;
-        }
-
-        .inCover{
-            display: flex;
-            font-size: large;
-            align-items: flex-start;
-        }
-
-        .inCover > img{
-            width: 20%;
-            margin-left: 0;
-            object-fit: contain;
-
-        }
-
-        .inCover > .inCoverContent{
-            width: 60%;
-        }
-
-        .inCover a{
-            margin-left: 2%;
-        }
-
-        a.linkToContact{
-            display: inline;
-            margin-left: 0;
-        }
-
-        .inCover h3{
-            text-align: left;
-            padding: 1% 0 1% 2%;
-            margin-top: 0;
-            margin-bottom: 1vh;
-        }
-
-        .inCover h4{
-            padding-left: 2%;
-            margin-bottom: 0.5vh;
-        }
-
-        h3{
-            font-size: x-large;
-        }
-
-        h4, .squareFour h4{
-            font-size: large;
-        }
-
-        .inCover p{
-            padding-left: 2%;
-        }
-
-        .btnSubscription{
-            z-index: 1;
-            position: relative;
-        }
-
-        .mainFour{
-            flex-direction: row;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .squareFour{
-            width: 20%;
-            padding: 2vh 0 2vh 0;
-            cursor: pointer;
-            transition-duration: 0.3s;
-        }
-
-        .squareFour:hover{
-            transform: scale(1.1, 1.1);
-        }
-
-        .squareFour > img{
-            height: 5vh;
-        }
-
-        .projectSquare > img{
-            width: 50%;
-            height: auto;
-        }
-
-        .btnShowAllProjects{
-            width: 20%;
-        }
-
-        .brandsLogo{
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-            width: 100%;
-            overflow-x: scroll;
-        }
-
-        .brandsLogo a{
-            display: block;
-            min-width: 15%;
-        }
-
-        .brandsLogo a:not(:first-child){
-            margin-left: 3%;
-        }
-
-        div.divPartners{
-            justify-content: space-around;
-        }
-
-        .divPartners > a {
-            width: 20%;
-        }
-    }
+}
 </style>

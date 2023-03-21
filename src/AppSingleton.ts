@@ -10,13 +10,17 @@ import UserDataMapper from "./database/datamappers/UserDataMapper";
 import ExtractTokenMiddleware from "./middlewares/ExtractTokenMiddleware";
 import SolutionFileCategoryRouter from "./routers/SolutionFileCategoryRouter";
 import SolutionFileFacade from "./business/facades/SolutionFileFacade";
-import AwsFileDataMapper from "./external/aws/AwsFileDataMapper";
-import AwsOperations from "./external/aws/AwsOperations";
 import SolutionFilesDataMapper from "./database/datamappers/SolutionFilesDataMapper";
 import PublicFilesRouter from "./routers/PublicFilesRouter";
 import ContactRouter from "./routers/ContactRouter";
 import ContactFacade from "./business/facades/ContactFacade";
 import ContactDataMapper from "./database/datamappers/ContactDataMapper";
+import AwsFileDataMapper from "./external/aws/files/AwsFileDataMapper";
+import AwsOperations from "./external/aws/files/AwsOperations";
+import SendMailSESDataMapper from "./external/aws/mail/SendMailSESDataMapper";
+import GuestRouter from "./routers/GuestRouter";
+import GuestFacade from "./business/facades/GuestFacade";
+import GuestDataMapper from "./database/datamappers/GuestDataMapper";
 
 
 export default class AppSingleton{
@@ -59,8 +63,8 @@ export default class AppSingleton{
         this.expressApp.use(new ExtractTokenMiddleware().getRequestHandler());
 
         this.expressApp.use(new LoginRouter(new LoginFacade(new UserDataMapper())).getRouter());
-        this.expressApp.use(new ContactRouter(new ContactFacade(new ContactDataMapper())).getRouter());
+        this.expressApp.use(new ContactRouter(new ContactFacade(new ContactDataMapper(), new SendMailSESDataMapper())).getRouter());
         this.expressApp.use(new SolutionFileCategoryRouter(new SolutionFileFacade(new AwsFileDataMapper(new AwsOperations()), new SolutionFilesDataMapper())).getRouter());
-
+        this.expressApp.use('/api', new GuestRouter(new GuestFacade(new GuestDataMapper(), new SendMailSESDataMapper())).getRouter());
     }
 }

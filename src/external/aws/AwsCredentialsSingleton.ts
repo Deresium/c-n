@@ -1,14 +1,28 @@
-import aws from "aws-sdk";
+import {S3Client} from "@aws-sdk/client-s3";
+import {SESClient} from "@aws-sdk/client-ses";
+
 
 export default class AwsCredentialsSingleton{
     private static instance: AwsCredentialsSingleton;
-    private readonly s3: aws.S3;
+    private readonly s3Client: S3Client;
+    private readonly sesClient: SESClient;
 
     private constructor() {
-        const credentials = new aws.Credentials(process.env.AWS_KEY_ID, process.env.AWS_KEY_SECRET);
-        this.s3 = new aws.S3({
-            credentials: credentials
-        })
+        this.s3Client = new S3Client({
+            region: 'eu-central-1',
+            credentials: {
+                accessKeyId: process.env.AWS_KEY_ID,
+                secretAccessKey: process.env.AWS_KEY_SECRET
+            }
+        });
+
+        this.sesClient = new SESClient({
+            region: 'eu-central-1',
+            credentials: {
+                accessKeyId: process.env.AWS_KEY_ID,
+                secretAccessKey: process.env.AWS_KEY_SECRET
+            }
+        });
     }
 
     public static getInstance(): AwsCredentialsSingleton{
@@ -18,8 +32,12 @@ export default class AwsCredentialsSingleton{
         return new AwsCredentialsSingleton();
     }
 
-    public getS3(){
-        return this.s3;
+    public getS3Client(){
+        return this.s3Client;
+    }
+
+    public getSESClient(){
+        return this.sesClient;
     }
 
 }

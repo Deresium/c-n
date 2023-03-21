@@ -23,7 +23,7 @@ class PublicFilesRouter extends ApplicationRouter_1.default {
             const file = yield this.solutionFileRequester.getSolutionFileCategoryIcon(parseInt(req.params.id));
             if (file) {
                 res.set('Content-Type', 'image/*');
-                res.send(file);
+                res.end(file, 'base64');
             }
             else {
                 res.status(404).send();
@@ -41,7 +41,7 @@ class PublicFilesRouter extends ApplicationRouter_1.default {
                 else {
                     res.setHeader('Content-disposition', `inline`);
                 }
-                res.send(file);
+                res.end(file, 'base64');
             }
             else {
                 res.status(404).send();

@@ -5,6 +5,6 @@ const forceDownloadPDF: RequestHandler = (req, res, next) => {
         res.attachment();
     }
     next();
-}
+};
 
 export default forceDownloadPDF;

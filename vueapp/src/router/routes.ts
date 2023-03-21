@@ -22,6 +22,8 @@ import CnEquipment from "@/views/CnEquipment.vue";
 import CnNews from "@/views/CnNews.vue";
 import CnCVG from "@/views/CnCVG.vue";
 import CnLogin from "@/views/CnLogin.vue";
+import CnEvent from "@/views/CnEvent.vue";
+import CnProgramme from "@/views/CnProgramme.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -118,8 +120,19 @@ const routes: Array<RouteRecordRaw> = [
         component: CnLogin
     },
     {
+        path: '/inscription',
+        name: 'inscription',
+        alias: ['/inscriptions', '/signup'],
+        component: CnEvent
+    },
+    {
+        path: '/programme',
+        name: 'programme',
+        component: CnProgramme
+    },
+    {
         path: '/:pathMatch(.*)*', redirect: '/'
     }
-]
+];
 
 export default routes

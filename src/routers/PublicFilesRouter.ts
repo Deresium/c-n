@@ -14,7 +14,7 @@ export default class PublicFilesRouter extends ApplicationRouter{
             const file = await this.solutionFileRequester.getSolutionFileCategoryIcon(parseInt(req.params.id));
             if(file) {
                 res.set('Content-Type', 'image/*');
-                res.send(file);
+                res.end(file, 'base64');
             }else{
                 res.status(404).send();
             }
@@ -31,7 +31,7 @@ export default class PublicFilesRouter extends ApplicationRouter{
                 } else {
                     res.setHeader('Content-disposition', `inline`);
                 }
-                res.send(file);
+                res.end(file, 'base64');
             }else{
                 res.status(404).send();
             }

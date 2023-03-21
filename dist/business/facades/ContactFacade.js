@@ -9,15 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const sendGridCn_1 = require("../../sendGridCn");
 class ContactFacade {
-    constructor(contactDataGateway) {
+    constructor(contactDataGateway, sendMailDataGateway) {
         this.contactDataGateway = contactDataGateway;
+        this.sendMailDataGateway = sendMailDataGateway;
     }
     addContact(contact) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.contactDataGateway.addContact(contact);
-            yield sendGridCn_1.sendContactMail(contact);
+            yield this.sendMailDataGateway.sendEmailContact(contact);
         });
     }
 }

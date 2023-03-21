@@ -1,5 +1,4 @@
 import ApplicationRouter from "./ApplicationRouter";
-import {sendContactMail} from "../sendGridCn";
 import ContactDS from "../business/models/contact/ContactDS";
 import IContactRequester from "../business/requesters/IContactRequester";
 
@@ -17,12 +16,6 @@ export default class ContactRouter extends ApplicationRouter{
             const contact = new ContactDS(contactJson.name, contactJson.firstName, contactJson.email, contactJson.company, contactJson.request);
             await this.contactRequester.addContact(contact);
             res.send();
-
-
-            /*const contact = await Contact.create(req.body.contact);
-            await sendContactMail(contact);
-            res.status(200).send(contact);*/
-
         })
     }
 
