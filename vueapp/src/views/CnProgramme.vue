@@ -1,6 +1,7 @@
 <template>
     <CnTitle><h2>IT Infrastructure Solution Day - Programme</h2></CnTitle>
     <div class="exhibitingList">
+
         <div class="exhibiting">
             <h3>R&M - Solutions pour Infrastructures Passives</h3>
             <div class="logoExhibiting">
@@ -44,15 +45,6 @@
             </div>
             <p>Romain vous présente les solutions de Phoenix Contact pour le switching industriel, ainsi que les
                 alimentations électriques industrielles.</p>
-        </div>
-
-        <div class="exhibiting">
-            <h3>Cisco - Switching & Wi-Fi Enterprise</h3>
-            <div class="logoExhibiting">
-                <img src="../assets/brands/cisco.png" alt="cisco logo"/>
-            </div>
-            <p>Pieter vous présente les solutions de Cisco pour le Switching et le Wi-Fi en Entreprise avec les
-                gammes Small Business et Catalyst.</p>
         </div>
 
         <div class="exhibiting">
