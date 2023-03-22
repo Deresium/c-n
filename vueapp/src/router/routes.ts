@@ -120,15 +120,15 @@ const routes: Array<RouteRecordRaw> = [
         component: CnLogin
     },
     {
+        path: '/programme',
+        name: 'programme',
+        component: CnProgramme
+    },
+    {
         path: '/inscription',
         name: 'inscription',
         alias: ['/inscriptions', '/signup'],
         component: CnEvent
-    },
-    {
-        path: '/programme',
-        name: 'programme',
-        component: CnProgramme
     },
     {
         path: '/:pathMatch(.*)*', redirect: '/'

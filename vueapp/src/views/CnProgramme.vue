@@ -108,7 +108,8 @@
 
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
+
 import CnTitle from "@/components/commons/CnTitle.vue";
 </script>
 
