@@ -108,9 +108,14 @@
 
 </template>
 
-<script lang="ts" setup>
+<script>
 
+import {defineComponent} from "vue";
 import CnTitle from "@/components/commons/CnTitle.vue";
+
+export default defineComponent({
+    components: {CnTitle}
+})
 </script>
 
 <style scoped>
