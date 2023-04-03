@@ -149,7 +149,7 @@
                         <img src="../assets/brands/civadis.png" alt="civadis"/>
                     </a>
                     <a href="https://www.bemac.be/" rel="noopener" target="_blank">
-                        <img src="../assets/brands/bemac.png" alt="bemac"/>
+                        <img src="../assets/brands/bemac-logo.png" alt="bemac"/>
                     </a>
                 </div>
             </div>

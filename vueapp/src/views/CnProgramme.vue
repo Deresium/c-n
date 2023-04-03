@@ -21,12 +21,11 @@
         </div>
 
         <div class="exhibiting">
-            <h3>Cisco - Switching & Wi-Fi Enterprise</h3>
+            <h3>Cisco - Switching, Wi-Fi & Firewall Enterprise</h3>
             <div class="logoExhibiting">
                 <img src="../assets/brands/cisco.png" alt="cisco logo"/>
             </div>
-            <p>Pieter vous présente les solutions de Cisco pour le Switching et le Wi-Fi en Entreprise avec les
-                gammes Small Business et Catalyst.</p>
+            <p>Pieter vous présente les solutions de Cisco pour le Switching, Wi-Fi et le Firewalling en Entreprise avec les gammes Small Business et Meraki.</p>
         </div>
 
         <div class="exhibiting">
@@ -39,12 +38,22 @@
         </div>
 
         <div class="exhibiting">
-            <h3>Phoenix Contact - Switching & Alimentations Industriel</h3>
+            <h3>Phoenix Contact - Switching & Alimentations Industriels</h3>
             <div class="logoExhibiting">
                 <img src="../assets/brands/phoenix_contact.png" alt="phoenix logo"/>
             </div>
             <p>Romain vous présente les solutions de Phoenix Contact pour le switching industriel, ainsi que les
                 alimentations électriques industrielles.</p>
+        </div>
+
+        <div class="exhibiting">
+            <h3>Bemac - Sécurité et Détection Incendie</h3>
+            <div class="logoExhibiting">
+                <img src="../assets/brands/bemac-logo.png" alt="bemac logo"/>
+            </div>
+            <p>
+                Laurent et Henry vous présentent les solutions de Bemac pour la sécurité et la détection incendie, avec notamment leurs centraux DIANA
+            </p>
         </div>
 
         <div class="exhibiting">
