@@ -76,92 +76,112 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
 import CnTitle from "@/components/commons/CnTitle.vue";
-import {ref} from "vue";
+import {defineComponent, ref} from "vue";
 import CnGuestAdd from "@/components/CnGuestAdd.vue";
 import RegisterGuest from "@/business/models/RegisterGuest";
 import validator from "validator";
 import axiosCn from "@/axios/axiosCn";
+export default defineComponent({
+    components: {CnTitle, CnGuestAdd},
+    setup(){
+        const mainGuestName = ref('');
+        const mainGuestFirstName = ref('');
+        const mainGuestEmail = ref('');
+        const company = ref('');
+        const nbComeWith = ref(1);
+        const guestsComeWith = new Array<RegisterGuest>();
 
-const mainGuestName = ref('');
-const mainGuestFirstName = ref('');
-const mainGuestEmail = ref('');
-const company = ref('');
-const nbComeWith = ref(1);
-const guestsComeWith = new Array<RegisterGuest>();
-
-const error = ref('');
-const onSend = ref(false);
-const saveDone = ref(false);
+        const error = ref('');
+        const onSend = ref(false);
+        const saveDone = ref(false);
 
 
-const emitGuest = (index: number, guest: RegisterGuest) => {
-    guestsComeWith[index] = guest;
-};
+        const emitGuest = (index: number, guest: RegisterGuest) => {
+            guestsComeWith[index] = guest;
+        };
 
-const getGuest = (index: number) => {
-    if (index > guestsComeWith.length) {
-        return null;
-    }
-    return guestsComeWith[index];
-};
+        const getGuest = (index: number) => {
+            if (index > guestsComeWith.length) {
+                return null;
+            }
+            return guestsComeWith[index];
+        };
 
-const sendGuestsToBack = async (): Promise<void> => {
-    const reduceListGuest = guestsComeWith.slice(0, nbComeWith.value);
-    const response = await axiosCn.post('/api/guests', {
-        mainGuest: {
-            name: mainGuestName.value,
-            firstName: mainGuestFirstName.value,
-            email: mainGuestEmail.value
-        },
-        company: company.value,
-        listGuests: reduceListGuest
-    });
-    if (response.status === 200) {
-        saveDone.value = true;
-    }
-};
+        const sendGuestsToBack = async (): Promise<void> => {
+            const reduceListGuest = guestsComeWith.slice(0, nbComeWith.value);
+            const response = await axiosCn.post('/api/guests', {
+                mainGuest: {
+                    name: mainGuestName.value,
+                    firstName: mainGuestFirstName.value,
+                    email: mainGuestEmail.value
+                },
+                company: company.value,
+                listGuests: reduceListGuest
+            });
+            if (response.status === 200) {
+                saveDone.value = true;
+            }
+        };
 
-const submitEventForm = async () => {
-    error.value = '';
-    onSend.value = true;
+        const submitEventForm = async () => {
+            error.value = '';
+            onSend.value = true;
 
-    const listEmails = new Array<string>();
-    listEmails.push(mainGuestEmail.value);
-    if (!mainGuestName.value || !mainGuestFirstName.value || !mainGuestEmail.value) {
-        error.value = 'Veuillez compléter le formulaire';
-        onSend.value = false;
-        return;
-    }
-
-    if (nbComeWith.value > guestsComeWith.length) {
-        error.value = 'Veuillez compléter le formulaire';
-        onSend.value = false;
-        return;
-    }
-
-    for (let i = 0; i < nbComeWith.value; ++i) {
-        const guest = guestsComeWith[i];
-        listEmails.push(guest.getEmail());
-        if (!guest.getEmail() || !guest.getFirstName() || !guest.getName()) {
-            error.value = 'Veuillez compléter le formulaire';
-            onSend.value = false;
-            return;
-        }
-    }
-    if (!error.value) {
-        for (const email of listEmails) {
-            if (!validator.isEmail(email)) {
-                error.value = 'Certains emails ne sont pas des emails valides';
+            const listEmails = new Array<string>();
+            listEmails.push(mainGuestEmail.value);
+            if (!mainGuestName.value || !mainGuestFirstName.value || !mainGuestEmail.value) {
+                error.value = 'Veuillez compléter le formulaire';
                 onSend.value = false;
                 return;
             }
+
+            if (nbComeWith.value > guestsComeWith.length) {
+                error.value = 'Veuillez compléter le formulaire';
+                onSend.value = false;
+                return;
+            }
+
+            for (let i = 0; i < nbComeWith.value; ++i) {
+                const guest = guestsComeWith[i];
+                listEmails.push(guest.getEmail());
+                if (!guest.getEmail() || !guest.getFirstName() || !guest.getName()) {
+                    error.value = 'Veuillez compléter le formulaire';
+                    onSend.value = false;
+                    return;
+                }
+            }
+            if (!error.value) {
+                for (const email of listEmails) {
+                    if (!validator.isEmail(email)) {
+                        error.value = 'Certains emails ne sont pas des emails valides';
+                        onSend.value = false;
+                        return;
+                    }
+                }
+            }
+            await sendGuestsToBack();
+            onSend.value = false;
+        }
+
+        return{
+            mainGuestName,
+            mainGuestFirstName,
+            mainGuestEmail,
+            company,
+            nbComeWith,
+            error,
+            onSend,
+            saveDone,
+            emitGuest,
+            getGuest,
+            submitEventForm
         }
     }
-    await sendGuestsToBack();
-    onSend.value = false;
-}
+});
+
+
 </script>
 
 <style>
