@@ -5,7 +5,7 @@
         </div>
         <div>
             <img src="../../assets/icons/mail.svg" alt="mail logo"/>
-            <p><a href="mailto:info@c-n.be">info@c-n.be</a></p>
+            <p><a translate="no" href="mailto:info@c-n.be">info@c-n.be</a></p>
         </div>
         <div>
             <img src="../../assets/icons/phone.svg" alt="phone logo"/>

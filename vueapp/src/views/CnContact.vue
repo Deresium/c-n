@@ -13,7 +13,7 @@
                         <p>4500 - Huy</p>
                         <p>Belgium</p>
                     </div>
-                    <div><a href="mailto:info@c-n.be">info@c-n.be</a></div>
+                    <div><a translate="no" href="mailto:info@c-n.be">info@c-n.be</a></div>
                     <div><a href="tel:+3285711777">+32 (0)85 711 777</a></div>
                     <div>TVA: BE0897 818 934</div>
                     <div>
