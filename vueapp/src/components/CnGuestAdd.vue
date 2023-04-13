@@ -16,47 +16,60 @@
     </div>
 </template>
 
-<script lang="ts" setup>
-import {ref, defineEmits, defineProps, watch, computed} from "vue";
+<script lang="ts">
+import {ref, defineEmits, defineProps, watch, computed, defineComponent} from "vue";
 import RegisterGuest from "@/business/models/RegisterGuest";
 
-const emits = defineEmits(['emitGuest']);
-
-const props = defineProps({
-    index: {
-        type: String,
-        required: true
+export default defineComponent({
+    props: {
+        index: {
+            type: String,
+            required: true
+        },
+        registerGuestBase: {
+            type: RegisterGuest,
+            required: false
+        }
     },
-    registerGuestBase: {
-        type: RegisterGuest,
-        required: false
+
+    emits: ['emitGuest'],
+
+    setup(props, context) {
+        const guestName = ref('');
+        const guestFirstName = ref('');
+        const guestEmail = ref('');
+
+        if(props.registerGuestBase){
+            guestName.value = props.registerGuestBase.getName();
+            guestFirstName.value = props.registerGuestBase.getFirstName();
+            guestEmail.value = props.registerGuestBase.getEmail();
+        }
+
+        const titleTxt = computed(() => {
+            if(guestName.value || guestFirstName.value){
+                return `${guestFirstName.value} ${guestName.value}`
+            }
+            return `Invite ${parseInt(props.index) + 1}`
+        });
+
+        watch([guestName, guestFirstName, guestEmail], () => {
+            emitGuest();
+        });
+
+        const emitGuest = () => {
+            context.emit('emitGuest', props.index, new RegisterGuest(guestName.value, guestFirstName.value, guestEmail.value));
+        }
+
+        return {
+            guestName,
+            guestFirstName,
+            guestEmail,
+            titleTxt
+        }
     }
 });
 
-const guestName = ref('');
-const guestFirstName = ref('');
-const guestEmail = ref('');
 
-if(props.registerGuestBase){
-    guestName.value = props.registerGuestBase.getName();
-    guestFirstName.value = props.registerGuestBase.getFirstName();
-    guestEmail.value = props.registerGuestBase.getEmail();
-}
-
-const titleTxt = computed(() => {
-    if(guestName.value || guestFirstName.value){
-        return `${guestFirstName.value} ${guestName.value}`
-    }
-    return `Invite ${parseInt(props.index) + 1}`
-});
-
-watch([guestName, guestFirstName, guestEmail], () => {
-    emitGuest();
-});
-
-const emitGuest = () => {
-    emits('emitGuest', props.index, new RegisterGuest(guestName.value, guestFirstName.value, guestEmail.value));
-}
 </script>
 
 <style scoped>

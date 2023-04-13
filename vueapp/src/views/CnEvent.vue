@@ -104,7 +104,7 @@ export default defineComponent({
 
         const getGuest = (index: number) => {
             if (index > guestsComeWith.length) {
-                return null;
+                return undefined;
             }
             return guestsComeWith[index];
         };
