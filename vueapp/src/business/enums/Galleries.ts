@@ -1,3 +1,4 @@
 export enum Galleries{
-    TENYEARS
+    TENYEARS,
+    FIFTEENYEARS
 }

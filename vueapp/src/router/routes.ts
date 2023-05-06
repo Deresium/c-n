@@ -16,6 +16,7 @@ import CnAboutUs from "@/views/CnAboutUs.vue";
 import CnContact from "@/views/CnContact.vue";
 import CnGallery from "@/views/CnGallery.vue";
 import Cn10Years from "@/components/gallery/Cn10Years.vue";
+import Cn15Years from "@/components/gallery/Cn15Years.vue";
 import CnSolutionFiles from "@/views/CnSolutionFiles.vue";
 import CnCertification from "@/views/CnCertification.vue";
 import CnEquipment from "@/views/CnEquipment.vue";
@@ -94,6 +95,10 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/gallery/10years',
         component: Cn10Years
+    },
+    {
+        path: '/gallery/15years',
+        component: Cn15Years
     },
     {
         path: '/fichesSolutions',

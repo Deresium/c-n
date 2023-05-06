@@ -1,7 +1,7 @@
 import {Galleries} from "@/enums/Galleries";
 <template>
     <div>
-        <CnGalleryTitle :title="'10 ans'"/>
+        <CnGalleryTitle :title="title"/>
         <div class="cnMain">
             <div class="mainPicture">
                 <img ref="bigImg" @click="clickOnImg" :src="imageSelect" :alt="imageSelect"/>
@@ -43,6 +43,10 @@ export default defineComponent({
                 case Galleries.TENYEARS:
                     allImage.value = require.context('@/assets/gallery/10years').keys();
                     path.value = '10years';
+                    break;
+                case Galleries.FIFTEENYEARS:
+                    allImage.value = require.context('@/assets/gallery/15years').keys();
+                    path.value = '15years';
                     break;
             }
         }
