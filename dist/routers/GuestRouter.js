@@ -30,7 +30,7 @@ class GuestRouter extends ApplicationRouter_1.default {
                     guests.push(new GuestDS_1.default(guest.name, guest.firstName, guest.email));
                 }
             }
-            const ownerGuestDS = new OwnerGuestDS_1.default(ownerGuest.company, mainGuest, guests);
+            const ownerGuestDS = new OwnerGuestDS_1.default(ownerGuest.company, ownerGuest.breakfastId, mainGuest, guests);
             try {
                 yield this.guestRequester.addGuests(ownerGuestDS);
                 res.send();

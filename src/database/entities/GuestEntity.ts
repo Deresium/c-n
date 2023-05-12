@@ -8,6 +8,7 @@ export default class GuestEntity extends Model {
     private firstName: string;
     private company: string;
     private ownerGuest: number;
+    private breakfastId: number;
 
     public getGuestId(){
         return this.guestId;
@@ -36,6 +37,9 @@ GuestEntity.init({
         type: DataTypes.STRING(512)
     },
     ownerGuest: {
+        type: DataTypes.INTEGER
+    },
+    breakfastId: {
         type: DataTypes.INTEGER
     }
 }, {

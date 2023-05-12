@@ -34,6 +34,9 @@ GuestEntity.init({
     },
     ownerGuest: {
         type: sequelize_1.DataTypes.INTEGER
+    },
+    breakfastId: {
+        type: sequelize_1.DataTypes.INTEGER
     }
 }, {
     tableName: 'guests',

@@ -25,6 +25,9 @@ const SendMailSESDataMapper_1 = __importDefault(require("./external/aws/mail/Sen
 const GuestRouter_1 = __importDefault(require("./routers/GuestRouter"));
 const GuestFacade_1 = __importDefault(require("./business/facades/GuestFacade"));
 const GuestDataMapper_1 = __importDefault(require("./database/datamappers/GuestDataMapper"));
+const BreakfastRouter_1 = __importDefault(require("./routers/BreakfastRouter"));
+const BreakfastFacade_1 = __importDefault(require("./business/facades/BreakfastFacade"));
+const BreakfastDataMapper_1 = __importDefault(require("./database/datamappers/BreakfastDataMapper"));
 class AppSingleton {
     constructor() {
         this.expressApp = express_1.default();
@@ -55,7 +58,9 @@ class AppSingleton {
         this.expressApp.use(new LoginRouter_1.default(new LoginFacade_1.default(new UserDataMapper_1.default())).getRouter());
         this.expressApp.use(new ContactRouter_1.default(new ContactFacade_1.default(new ContactDataMapper_1.default(), new SendMailSESDataMapper_1.default())).getRouter());
         this.expressApp.use(new SolutionFileCategoryRouter_1.default(new SolutionFileFacade_1.default(new AwsFileDataMapper_1.default(new AwsOperations_1.default()), new SolutionFilesDataMapper_1.default())).getRouter());
-        this.expressApp.use('/api', new GuestRouter_1.default(new GuestFacade_1.default(new GuestDataMapper_1.default(), new SendMailSESDataMapper_1.default())).getRouter());
+        const breakfastFacade = new BreakfastFacade_1.default(new BreakfastDataMapper_1.default());
+        this.expressApp.use('/api', new GuestRouter_1.default(new GuestFacade_1.default(new GuestDataMapper_1.default(), new SendMailSESDataMapper_1.default(), breakfastFacade)).getRouter());
+        this.expressApp.use('/api', new BreakfastRouter_1.default(breakfastFacade).getRouter());
     }
 }
 exports.default = AppSingleton;

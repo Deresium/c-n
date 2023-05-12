@@ -47,45 +47,50 @@ export default class SendMailSESDataMapper implements ISendMailDataGateway {
         `
     }
 
-    async sendMailGuest(guest: OwnerGuestDS): Promise<void> {
+    async sendMailGuest(guest: OwnerGuestDS, breakfastFrenchDate: string): Promise<void> {
+        const listMailTo = [];
+        if(process.env.NODE_ENV === 'production') {
+            listMailTo.push('annick.steinbusch@c-n.be');
+        }else{
+            listMailTo.push('dimitri.steinbusch@hotmail.com');
+        }
         const client = AwsCredentialsSingleton.getInstance().getSESClient();
         const command = new SendEmailCommand({
             Message: {
                 Subject: {
-                    Data: `Confirmation d'invitation de ${guest.getMainGuestFirstName()} ${guest.getMainGuestName()}`,
+                    Data: `Confirmation d'invitation petit-déjeuner de ${guest.getMainGuestFirstName()} ${guest.getMainGuestName()}`,
                 },
                 Body: {
                     Html: {
-                        Data: SendMailSESDataMapper.getTextGuest(true, guest)
+                        Data: SendMailSESDataMapper.getTextGuest(true, guest, breakfastFrenchDate)
                     },
                     Text: {
-                        Data: SendMailSESDataMapper.getTextGuest(false, guest)
+                        Data: SendMailSESDataMapper.getTextGuest(false, guest, breakfastFrenchDate)
                     }
                 }
             },
             Destination: {
-                ToAddresses: ['annick.steinbusch@c-n.be']
-                //ToAddresses: ['dimitri.steinbusch@hotmail.com']
+                ToAddresses: listMailTo
             },
             Source: 'info@c-n.be'
         });
 
         try{
             await client.send(command);
-            console.log(`mail envoyé à annick.steinbusch@c-n.be`);
+            console.log(`mail envoyé à ${listMailTo[0]}`);
         }catch(exception){
             console.error(exception);
         }
     }
 
-    private static getTextGuest(html: boolean, guest: OwnerGuestDS): string{
+    private static getTextGuest(html: boolean, guest: OwnerGuestDS, breakfastFrenchDate: string): string{
         let separator = '\n';
         if (html) {
             separator = '<br/>'
         }
 
         let text = `
-        Confirmation d'invitation de ${guest.getMainGuestName()} ${guest.getMainGuestFirstName()} (${guest.getMainGuestEmail()}) de la société ${guest.getCompany()} ${separator}
+        Confirmation d'invitation de ${guest.getMainGuestName()} ${guest.getMainGuestFirstName()} (${guest.getMainGuestEmail()}) de la société ${guest.getCompany()} pour le petit-déjeuner du ${breakfastFrenchDate} ${separator}
         Invités supplémentaires: ${guest.getGuests().length} ${separator}
         `;
 

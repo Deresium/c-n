@@ -8,20 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class GuestFacade {
-    constructor(guestDataGateway, sendMailDataGateway, breakfastRequester) {
-        this.guestDataGateway = guestDataGateway;
-        this.sendMailDataGateway = sendMailDataGateway;
+const ApplicationRouter_1 = __importDefault(require("./ApplicationRouter"));
+class BreakfastRouter extends ApplicationRouter_1.default {
+    constructor(breakfastRequester) {
+        super();
         this.breakfastRequester = breakfastRequester;
     }
-    addGuests(ownerGuest) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.guestDataGateway.addGuests(ownerGuest);
-            const breakfast = yield this.breakfastRequester.getBreakfast(ownerGuest.getBreakfastId());
-            yield this.sendMailDataGateway.sendMailGuest(ownerGuest, breakfast.getDateFormatFrench());
-        });
+    initRoutes() {
+        this.getRouter().get('/breakfast', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const breakfasts = yield this.breakfastRequester.getShowBreakfasts();
+            res.send(breakfasts);
+        }));
     }
 }
-exports.default = GuestFacade;
-//# sourceMappingURL=GuestFacade.js.map
+exports.default = BreakfastRouter;
+//# sourceMappingURL=BreakfastRouter.js.map

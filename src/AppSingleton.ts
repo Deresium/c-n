@@ -21,6 +21,9 @@ import SendMailSESDataMapper from "./external/aws/mail/SendMailSESDataMapper";
 import GuestRouter from "./routers/GuestRouter";
 import GuestFacade from "./business/facades/GuestFacade";
 import GuestDataMapper from "./database/datamappers/GuestDataMapper";
+import BreakfastRouter from "./routers/BreakfastRouter";
+import BreakfastFacade from "./business/facades/BreakfastFacade";
+import BreakfastDataMapper from "./database/datamappers/BreakfastDataMapper";
 
 
 export default class AppSingleton{
@@ -65,6 +68,9 @@ export default class AppSingleton{
         this.expressApp.use(new LoginRouter(new LoginFacade(new UserDataMapper())).getRouter());
         this.expressApp.use(new ContactRouter(new ContactFacade(new ContactDataMapper(), new SendMailSESDataMapper())).getRouter());
         this.expressApp.use(new SolutionFileCategoryRouter(new SolutionFileFacade(new AwsFileDataMapper(new AwsOperations()), new SolutionFilesDataMapper())).getRouter());
-        this.expressApp.use('/api', new GuestRouter(new GuestFacade(new GuestDataMapper(), new SendMailSESDataMapper())).getRouter());
+
+        const breakfastFacade = new BreakfastFacade(new BreakfastDataMapper());
+        this.expressApp.use('/api', new GuestRouter(new GuestFacade(new GuestDataMapper(), new SendMailSESDataMapper(), breakfastFacade)).getRouter());
+        this.expressApp.use('/api', new BreakfastRouter(breakfastFacade).getRouter());
     }
 }

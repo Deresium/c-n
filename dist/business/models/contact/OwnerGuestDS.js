@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class OwnerGuestDS {
-    constructor(company, mainGuest, listGuests) {
+    constructor(company, breakfastId, mainGuest, listGuests) {
         this.company = company;
+        this.breakfastId = breakfastId;
         this.mainGuest = mainGuest;
         this.listGuests = listGuests;
     }
@@ -20,6 +21,9 @@ class OwnerGuestDS {
     }
     getGuests() {
         return this.listGuests;
+    }
+    getBreakfastId() {
+        return this.breakfastId;
     }
 }
 exports.default = OwnerGuestDS;

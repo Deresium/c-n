@@ -6,6 +6,18 @@
         <div class="flex">
             <div class="completeForm">
                 <form v-if="!saveDone" class="formGuest" v-on:submit.prevent="submitEventForm" novalidate="novalidate">
+
+                    <div class="breakfastDiv">
+                        <p>Sélectionner la date du petit-déjeuner</p>
+                    <div class="breakfastDate">
+                        <label class="labelBreakfast" v-for="breakfast in breakfastList"
+                               :key="breakfast.getBreakfastId()">
+                            <input type="radio" :value="breakfast.getBreakfastId()" v-model="breakfastIdSelected"/>
+                            <span class="spanBreakfast">{{ breakfast.getDateFormatFrench() }}</span>
+                        </label>
+                    </div>
+                    </div>
+
                     <div class="mainGuest">
                         <label class="inputText">
                             <span>Nom</span>
@@ -83,9 +95,11 @@ import CnGuestAdd from "@/components/CnGuestAdd.vue";
 import RegisterGuest from "@/business/models/RegisterGuest";
 import validator from "validator";
 import axiosCn from "@/axios/axiosCn";
+import Breakfast from "@/business/models/Breakfast";
+
 export default defineComponent({
     components: {CnTitle, CnGuestAdd},
-    setup(){
+    setup() {
         const mainGuestName = ref('');
         const mainGuestFirstName = ref('');
         const mainGuestEmail = ref('');
@@ -96,6 +110,16 @@ export default defineComponent({
         const error = ref('');
         const onSend = ref(false);
         const saveDone = ref(false);
+        const breakfastIdSelected = ref('');
+
+
+        const breakfastList = ref(new Array<Breakfast>());
+
+        axiosCn.get('/api/breakfast').then(response => {
+            for (const breakfast of response.data) {
+                breakfastList.value.push(new Breakfast(breakfast.breakfastId, breakfast.dateISO, breakfast.dateFormatFrench))
+            }
+        });
 
 
         const emitGuest = (index: number, guest: RegisterGuest) => {
@@ -118,6 +142,7 @@ export default defineComponent({
                     email: mainGuestEmail.value
                 },
                 company: company.value,
+                breakfastId: breakfastIdSelected.value,
                 listGuests: reduceListGuest
             });
             if (response.status === 200) {
@@ -138,6 +163,12 @@ export default defineComponent({
             }
 
             if (nbComeWith.value > guestsComeWith.length) {
+                error.value = 'Veuillez compléter le formulaire';
+                onSend.value = false;
+                return;
+            }
+
+            if(!breakfastIdSelected.value){
                 error.value = 'Veuillez compléter le formulaire';
                 onSend.value = false;
                 return;
@@ -165,7 +196,7 @@ export default defineComponent({
             onSend.value = false;
         }
 
-        return{
+        return {
             mainGuestName,
             mainGuestFirstName,
             mainGuestEmail,
@@ -176,7 +207,9 @@ export default defineComponent({
             saveDone,
             emitGuest,
             getGuest,
-            submitEventForm
+            submitEventForm,
+            breakfastList,
+            breakfastIdSelected
         }
     }
 });
@@ -235,9 +268,31 @@ export default defineComponent({
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .formGuest .labelRadio input:checked ~ .spanRadio {
+    background-color: #FEFE00;
+}
+
+.formGuest .breakfastDate{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    column-gap: 5px;
+    margin-top: 10px;
+}
+
+.formGuest .spanBreakfast {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 1px 10px 1px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.formGuest .labelBreakfast input:checked ~ .spanBreakfast {
     background-color: #FEFE00;
 }
 
@@ -283,12 +338,12 @@ export default defineComponent({
 }
 
 @media (min-width: 900px) {
-    .flex{
+    .flex {
         display: flex;
         justify-content: flex-start;
     }
 
-    .completeForm{
+    .completeForm {
         width: 50%;
     }
 

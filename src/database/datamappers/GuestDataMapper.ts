@@ -13,7 +13,8 @@ export default class GuestDataMapper implements IGuestDataGateway {
                     email: ownerGuest.getMainGuestEmail(),
                     name: ownerGuest.getMainGuestName(),
                     firstName: ownerGuest.getMainGuestFirstName(),
-                    company: ownerGuest.getCompany()
+                    company: ownerGuest.getCompany(),
+                    breakfastId: ownerGuest.getBreakfastId()
                 }, {transaction: t});
 
                 for (const guest of ownerGuest.getGuests()) {

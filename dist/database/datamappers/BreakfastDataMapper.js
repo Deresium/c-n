@@ -8,20 +8,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class GuestFacade {
-    constructor(guestDataGateway, sendMailDataGateway, breakfastRequester) {
-        this.guestDataGateway = guestDataGateway;
-        this.sendMailDataGateway = sendMailDataGateway;
-        this.breakfastRequester = breakfastRequester;
-    }
-    addGuests(ownerGuest) {
+const BreakfastEntity_1 = __importDefault(require("../entities/BreakfastEntity"));
+class BreakfastDataMapper {
+    getShowBreakfasts() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.guestDataGateway.addGuests(ownerGuest);
-            const breakfast = yield this.breakfastRequester.getBreakfast(ownerGuest.getBreakfastId());
-            yield this.sendMailDataGateway.sendMailGuest(ownerGuest, breakfast.getDateFormatFrench());
+            return yield BreakfastEntity_1.default.findAll({
+                where: {
+                    show: true
+                },
+                order: [['date', 'ASC']]
+            });
+        });
+    }
+    getBreakfast(breakfastId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield BreakfastEntity_1.default.findByPk(breakfastId);
         });
     }
 }
-exports.default = GuestFacade;
-//# sourceMappingURL=GuestFacade.js.map
+exports.default = BreakfastDataMapper;
+//# sourceMappingURL=BreakfastDataMapper.js.map

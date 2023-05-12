@@ -21,7 +21,7 @@ export default class GuestRouter extends ApplicationRouter {
                     guests.push(new GuestDS(guest.name, guest.firstName, guest.email));
                 }
             }
-            const ownerGuestDS: OwnerGuestDS = new OwnerGuestDS(ownerGuest.company, mainGuest, guests);
+            const ownerGuestDS: OwnerGuestDS = new OwnerGuestDS(ownerGuest.company, ownerGuest.breakfastId, mainGuest, guests);
 
             try {
                 await this.guestRequester.addGuests(ownerGuestDS);
