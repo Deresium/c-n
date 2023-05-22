@@ -1,7 +1,7 @@
 <template>
     <div>
         <CnTitle>
-            <h2>Infrastructure Solution Day - Jeudi 27 Avril 2023</h2>
+            <h2>Petit déjeuner chez Cable & Network</h2>
         </CnTitle>
         <div class="flex">
             <div class="completeForm">
@@ -67,22 +67,10 @@
                 </div>
             </div>
             <div class="fillInfo">
-                <p><img class="iconInfra" src="../assets/icons/calendar.svg" alt="calendar icon"/> Jeudi 27 avril 2023 -
-                    de
-                    10h à 18h</p>
-                <p><img class="iconInfra" src="../assets/icons/placeholder.svg" alt="placeholder icon"/> Avenue Albert
-                    1er,
-                    14 - 4500 Huy</p>
-                <p><img class="iconInfra" src="../assets/icons/dinner.svg" alt="dinner icon"/> Un buffet et une
-                    sélection de
-                    vins durant toute la journée</p>
-                <p>
-                    <img class="iconInfra" src="../assets/icons/booth.svg" alt="booth icon"/>
-                    <span class="infoWithLink">
-                    Programme de la journée disponible sur
-                    <router-link class="programmeLink" :to="{name: 'programme'}">c-n.be/programme</router-link>
-                </span>
-                </p>
+                <img class="imgBreakfast" src="../assets/gallery/15years/buffet_6.jpg" alt="news_pic"/>
+                <p>Petit déjeuner avec viennoiseries, café, chocolat chaud, … </p>
+                <p>Chaque participant recevra un assortiment de macarons Darcis</p>
+                <img class="imgBreakfast" src="../assets/macaron.png" alt="macarons pics"/>
             </div>
         </div>
     </div>
@@ -348,8 +336,9 @@ export default defineComponent({
     }
 
     .fillInfo {
-        display: block;
-        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         margin-left: 100px;
         color: #2E3092;
     }
@@ -358,12 +347,11 @@ export default defineComponent({
         display: flex;
         align-items: center;
         margin-bottom: 20px;
+        margin-top: 20px;
     }
 
-    .fillInfo p img {
-        width: 50px;
-        height: 50px;
-        margin-right: 20px;
+    .fillInfo img {
+        width: 500px;
     }
 }
 
