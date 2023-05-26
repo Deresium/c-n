@@ -1,7 +1,7 @@
 <template>
     <div>
         <CnTitle>
-            <h2>Petit déjeuner chez Cable & Network</h2>
+            <h2>Petit déjeuner technique chez Cable & Network</h2>
         </CnTitle>
         <div class="flex">
             <div class="completeForm">

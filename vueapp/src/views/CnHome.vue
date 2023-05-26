@@ -18,7 +18,7 @@
                 <img class="imgNews" src="../assets/gallery/15years/buffet_6.jpg" alt="news_pic"/>
                 <div class="inCoverContent">
                     <h3 class="desktop">A la une</h3>
-                    <h4>Petit déjeuner chez Cable & Network</h4>
+                    <h4>Petit déjeuner technique chez Cable & Network</h4>
                     <div class="infraDayInfo">
                         <p>Petit déjeuner avec viennoiseries, café, chocolat chaud, … </p>
                         <p>Chaque participant recevra un assortiment de macarons Darcis</p>
