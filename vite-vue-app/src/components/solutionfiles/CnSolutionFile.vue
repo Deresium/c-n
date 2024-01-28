@@ -42,7 +42,8 @@ export default defineComponent({
     setup(props, context) {
         const userStore = useUserStore();
         const time = ref(new Date().getTime());
-        const urlPdf = (download: boolean) => `${import.meta.env.VITE_APP_URL_CN}/solutionFile/${props.solutionFile.getSolutionFileId()}/pdfFile/${encodeURIComponent(props.solutionFile.getTitle())}?download=${download}&time=${time.value}`;
+        const urlStart = import.meta.env.VITE_APP_URL_CN ? import.meta.env.VITE_APP_URL_CN : '';
+        const urlPdf = (download: boolean) => `${urlStart}/solutionFile/${props.solutionFile.getSolutionFileId()}/pdfFile/${encodeURIComponent(props.solutionFile.getTitle())}?download=${download}&time=${time.value}`;
         const description = computed(() => props.solutionFile.getDescription().replaceAll('\n', '<br/>'));
         const isAdmin = computed(() => userStore.onlyAdmin);
         const modalUpdateSolutionFile = ref(false);

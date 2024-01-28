@@ -20,8 +20,9 @@ export default defineComponent({
     setup(props){
         const preview = ref(false);
         const successLoaded = ref(false);
+        const urlStart = import.meta.env.VITE_APP_URL_CN ? import.meta.env.VITE_APP_URL_CN : '';
 
-        const pathToPdf = computed(() => `${import.meta.env.VITE_APP_URL_CN}/solutionsfiles/${encodeURIComponent(props.fileUrl)}`);
+        const pathToPdf = computed(() => `${urlStart}/solutionsfiles/${encodeURIComponent(props.fileUrl)}`);
         const pathToPdfDownload = computed(() => `${pathToPdf.value}?download=true`);
         const isMobile = computed(() => {
             const userAgent = navigator.userAgent;
