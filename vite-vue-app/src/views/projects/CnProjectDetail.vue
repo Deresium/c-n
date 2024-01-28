@@ -51,17 +51,17 @@
             }
         },
         setup(props){
-            const fullPathLogo = computed(() => `/projects/${props.imgLogoExtension}`);
+            const fullPathLogo = computed(() => `${import.meta.env.BASE_URL}projects/${props.imgLogoExtension}`);
 
             const fullPathP1 = computed(() => {
                 if(props.imgExtension1)
-                    return `/projects/${props.imgExtension1}`;
+                    return `${import.meta.env.BASE_URL}projects/${props.imgExtension1}`;
                 return undefined;
             });
 
             const fullPathP2 = computed(() => {
                 if(props.imgExtension2)
-                    return `/projects/${props.imgExtension2}`;
+                    return `${import.meta.env.BASE_URL}projects/${props.imgExtension2}`;
                 return undefined;
             })
 

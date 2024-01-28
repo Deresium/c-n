@@ -34,7 +34,7 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const fullPath = computed(() => `/${props.imgNameExtension}`);
+        const fullPath = computed(() => `${import.meta.env.BASE_URL}${props.imgNameExtension}`);
 
         return {
             fullPath

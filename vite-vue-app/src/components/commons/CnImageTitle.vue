@@ -24,7 +24,8 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const fullPath = computed(() => `/services/${props.imgLogoExtension}`);
+        const baseUrl = import.meta.env.BASE_URL;
+        const fullPath = computed(() => `${import.meta.env.BASE_URL}services/${props.imgLogoExtension}`);
 
         const cssTitle = computed(() => {
             return {
@@ -43,7 +44,8 @@ export default defineComponent({
         return {
             fullPath,
             cssTitle,
-            cssImg
+            cssImg,
+            baseUrl
         }
     }
 })

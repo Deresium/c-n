@@ -37,7 +37,7 @@ export default defineComponent({
     setup(props) {
         const fullPathPic = computed(() => {
             if (props.urlPic !== null)
-                return `/projects/${props.urlPic}`;
+                return `${import.meta.env.BASE_URL}projects/${props.urlPic}`;
             return null;
         })
 

@@ -1,4 +1,4 @@
-import Guest from "./Guest.ts";
+import Guest from "./Guest";
 import validator from "validator";
 
 export default class GuestForm extends Guest{

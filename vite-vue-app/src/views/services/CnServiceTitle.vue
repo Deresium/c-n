@@ -24,7 +24,7 @@
             }
         },
         setup(props){
-            const fullPath = computed(() => `/icons/${props.imgName}.svg`);
+            const fullPath = computed(() => `${import.meta.env.BASE_URL}icons/${props.imgName}.svg`);
 
             return{
                 fullPath

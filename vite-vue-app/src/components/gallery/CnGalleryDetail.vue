@@ -194,7 +194,7 @@ export default defineComponent({
 
         getAllImages();
         allImage.value.forEach((value, index) => {
-            allImage.value[index] = `/gallery/${path.value}/${value.replace('./', '')}`;
+            allImage.value[index] = `${import.meta.env.BASE_URL}gallery/${path.value}/${value.replace('./', '')}`;
         });
         imageSelect.value = allImage.value[0];
 
