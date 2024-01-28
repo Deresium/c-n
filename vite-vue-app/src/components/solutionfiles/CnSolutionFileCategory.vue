@@ -51,7 +51,8 @@ export default defineComponent({
     setup(props, context) {
         const userStore = useUserStore();
         const time = ref(new Date().getTime());
-        const urlIcon = computed(() => `${import.meta.env.VITE_APP_URL_CN}/solutionFileCategory/${props.solutionFileCategory.getSolutionFileCategoryId()}/icon?time=${time.value}`);
+        const urlStart = import.meta.env.VITE_APP_URL_CN ? import.meta.env.VITE_APP_URL_CN : '';
+        const urlIcon = computed(() => `${urlStart}/solutionFileCategory/${props.solutionFileCategory.getSolutionFileCategoryId()}/icon?time=${time.value}`);
         const isAdmin = computed(() => userStore.onlyAdmin);
         const solutionFiles = ref();
         const solutionsVisibility = ref(false);
