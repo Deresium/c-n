@@ -67,7 +67,7 @@
                         <router-link to="/news">News</router-link>
                     </li>
                     <li @click="closeMenuPhone">
-                        <router-link to="/projets">Projets et témoignages clients</router-link>
+                        <router-link to="/projets">Nos Références</router-link>
                     </li>
                     <li @click="closeMenuPhone">
                         <router-link to="/certifications">Attestations et Certifications</router-link>

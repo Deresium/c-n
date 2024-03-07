@@ -12,8 +12,8 @@
 import {defineComponent} from "vue";
 import CnNavbar from "./components/commons/CnNavbar.vue";
 import CnFooter from "./components/commons/CnFooter.vue";
-import SendTokenLogin from "./business/login/SendTokenLogin.ts";
-import DecryptCookie from "./business/login/DecryptCookie.ts";
+import SendTokenLogin from "./business/login/SendTokenLogin";
+import DecryptCookie from "./business/login/DecryptCookie";
 
 export default defineComponent({
     components: {
