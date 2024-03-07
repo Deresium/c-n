@@ -3,6 +3,15 @@
         <CnTitle>
             <h2>Petit déjeuner technique chez Cable & Network</h2>
         </CnTitle>
+        <div class="phone infoPhone">
+            <p class="address large">Avenue Albert 1er, 14 à 4500 Huy</p>
+            <p class="large">Présentations Techniques sur :</p>
+            <p>Fortinet (Firewall, Switch et AP Wi-Fi)</p>
+            <p>Site Survey Wi-Fi avec Ekahau</p>
+            <p>Vidéosurveillance (Milestone XProtect et Hanwha)</p>
+            <p>Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)</p>
+            <p>Détection Intrusion (Vanderbilt SPC)</p>
+        </div>
         <div class="flex">
             <div class="completeForm">
                 <form v-if="!saveDone" class="formGuest" v-on:submit.prevent="submitEventForm" novalidate>
@@ -69,8 +78,17 @@
             <div class="fillInfo">
                 <img class="imgBreakfast" src="/gallery/15years/buffet_6.jpg" alt="news_pic"/>
                 <p>Petit déjeuner avec viennoiseries, café, chocolat chaud, … </p>
-                <p>Chaque participant recevra un assortiment de macarons Darcis</p>
-                <img class="imgBreakfast" src="../assets/macaron.png" alt="macarons pics"/>
+                <div class="infoDesktop">
+                    <p class="address">Avenue Albert 1er, 14 à 4500 Huy</p>
+                    <p class="infoMain">Présentations Techniques sur :</p>
+                    <p>Fortinet (Firewall, Switch et AP Wi-Fi)</p>
+                    <p>Site Survey Wi-Fi avec Ekahau</p>
+                    <p>Vidéosurveillance (Milestone XProtect et Hanwha)</p>
+                    <p>Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)</p>
+                    <p>Détection Intrusion (Vanderbilt SPC)</p>
+                </div>
+                <p>Chaque participant recevra un lapin Neuhaus, remplit de délicieux oeufs au chocolat.</p>
+                <img class="neuhaus imgBreakfast" src="../assets/neuhaus.png" alt="neuhaus pics"/>
             </div>
         </div>
     </div>
@@ -182,7 +200,7 @@ export default defineComponent({
             }
             await sendGuestsToBack();
             onSend.value = false;
-        }
+        };
 
         return {
             mainGuestName,
@@ -325,6 +343,26 @@ export default defineComponent({
     display: none;
 }
 
+.infoPhone {
+    color: #2e3092;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 70px;
+}
+
+.infoPhone .address{
+    margin-bottom: 30px;
+}
+
+.infoPhone p {
+    margin-bottom: 20px;
+}
+
+.large{
+    font-size: large;
+    font-weight: bold;
+}
+
 @media (min-width: 900px) {
     .flex {
         display: flex;
@@ -353,6 +391,12 @@ export default defineComponent({
     .fillInfo img {
         width: 500px;
     }
+
+    .infoDesktop .address, .infoDesktop .infoMain {
+        font-weight: bold;
+    }
+
+
 }
 
 </style>

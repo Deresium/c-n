@@ -30,21 +30,21 @@
         </div>
 
         <div class="cnMain">
-<!--            <div class="inCover">
+            <div class="inCover">
                 <h3 class="phone">A la une</h3>
-                <img class="imgNews" src="../assets/gallery/15years/buffet_6.jpg" alt="news_pic"/>
+                <img class="imgNews" src="../assets/neuhaus.png" alt="news_pic"/>
                 <div class="inCoverContent">
                     <h3 class="desktop">A la une</h3>
                     <h4>Petit déjeuner technique chez Cable & Network</h4>
                     <div class="infraDayInfo">
                         <p>Petit déjeuner avec viennoiseries, café, chocolat chaud, … </p>
-                        <p>Chaque participant recevra un assortiment de macarons Darcis</p>
+                        <p>Chaque participant recevra un lapin Neuhaus, remplit de délicieux oeufs au chocolat.</p>
                         <p>
                             <router-link class="inscriptionLink" :to="{name: 'inscription'}">S'inscrire</router-link>
                         </p>
                     </div>
                 </div>
-            </div>-->
+            </div>
 
             <div class="divFour divServices">
                 <h3>Solutions</h3>
@@ -232,6 +232,13 @@ export default defineComponent({
 .inCover {
     margin-top: 2vh;
     color: #2E3092;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inCover img {
+    width: 50%;
 }
 
 .btnSubscription {
@@ -247,6 +254,7 @@ h3 {
     margin-top: 1vh;
     padding-top: 1vh;
     padding-bottom: 1vh;
+    width: 100%;
 }
 
 h4 {
@@ -420,6 +428,7 @@ div.divPartners {
 
     .inCover {
         display: flex;
+        flex-direction: row;
         font-size: large;
         align-items: stretch;
     }
@@ -432,7 +441,7 @@ div.divPartners {
     }
 
     .inCover > .inCoverContent {
-        width: 60%;
+        width: 80%;
     }
 
     .inCover a {
