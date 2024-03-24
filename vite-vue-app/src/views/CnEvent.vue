@@ -6,11 +6,11 @@
         <div class="phone infoPhone">
             <p class="address large">Avenue Albert 1er, 14 à 4500 Huy</p>
             <p class="large">Présentations Techniques sur :</p>
-            <p>Fortinet (Firewall, Switch et AP Wi-Fi)</p>
-            <p>Site Survey Wi-Fi avec Ekahau</p>
-            <p>Vidéosurveillance (Milestone XProtect et Hanwha)</p>
-            <p>Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)</p>
-            <p>Détection Intrusion (Vanderbilt SPC)</p>
+            <p>- Fortinet (Firewall, Switch et AP Wi-Fi)<br/>
+            - Site Survey Wi-Fi avec Ekahau<br/>
+            - Vidéosurveillance (Milestone XProtect et Hanwha)<br/>
+            - Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)<br/>
+            - Détection Intrusion (Vanderbilt SPC)</p>
         </div>
         <div class="flex">
             <div class="completeForm">
@@ -76,18 +76,18 @@
                 </div>
             </div>
             <div class="fillInfo">
-                <img class="imgBreakfast" src="/gallery/15years/buffet_6.jpg" alt="news_pic"/>
+                <img class="imgBreakfast" src="../assets/brekfast.jpg" alt="news_pic"/>
                 <p>Petit déjeuner avec viennoiseries, café, chocolat chaud, … </p>
                 <div class="infoDesktop">
                     <p class="address">Avenue Albert 1er, 14 à 4500 Huy</p>
                     <p class="infoMain">Présentations Techniques sur :</p>
-                    <p>Fortinet (Firewall, Switch et AP Wi-Fi)</p>
-                    <p>Site Survey Wi-Fi avec Ekahau</p>
-                    <p>Vidéosurveillance (Milestone XProtect et Hanwha)</p>
-                    <p>Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)</p>
-                    <p>Détection Intrusion (Vanderbilt SPC)</p>
+                    <p>- Fortinet (Firewall, Switch et AP Wi-Fi)<br/>
+                    - Site Survey Wi-Fi avec Ekahau<br/>
+                    - Vidéosurveillance (Milestone XProtect et Hanwha)<br/>
+                    - Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)<br/>
+                    - Détection Intrusion (Vanderbilt SPC)</p>
                 </div>
-                <p>Chaque participant recevra un lapin Neuhaus, remplit de délicieux oeufs au chocolat.</p>
+                <p>Chaque participant recevra un assortissement de délicieuses pralines Neuhaus.</p>
                 <img class="neuhaus imgBreakfast" src="../assets/neuhaus.png" alt="neuhaus pics"/>
             </div>
         </div>

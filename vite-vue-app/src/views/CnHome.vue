@@ -32,13 +32,19 @@
         <div class="cnMain">
             <div class="inCover">
                 <h3 class="phone">A la une</h3>
-                <img class="imgNews" src="../assets/neuhaus.png" alt="news_pic"/>
+                <img class="imgNews" src="../assets/brekfast.jpg" alt="news_pic"/>
                 <div class="inCoverContent">
                     <h3 class="desktop">A la une</h3>
                     <h4>Petit déjeuner technique chez Cable & Network</h4>
                     <div class="infraDayInfo">
                         <p>Petit déjeuner avec viennoiseries, café, chocolat chaud, … </p>
-                        <p>Chaque participant recevra un lapin Neuhaus, remplit de délicieux oeufs au chocolat.</p>
+                        <p>Présentations techniques sur :</p>
+                            <p>- Fortinet (Firewall, Switch et AP Wi-Fi)<br/>
+                            - Site Survey Wi-Fi avec Ekahau<br/>
+                            - Vidéosurveillance (Milestone XProtect et Hanwha)<br/>
+                            - Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)<br/>
+                            - Détection Intrusion (Vanderbilt SPC)</p>
+                        <p>Chaque participant recevra un assortissement de délicieuses pralines Neuhaus.</p>
                         <p>
                             <router-link class="inscriptionLink" :to="{name: 'inscription'}">S'inscrire</router-link>
                         </p>
@@ -238,7 +244,7 @@ export default defineComponent({
 }
 
 .inCover img {
-    width: 50%;
+    width: 100%;
 }
 
 .btnSubscription {
