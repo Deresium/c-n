@@ -11,6 +11,8 @@
             - Vidéosurveillance (Milestone XProtect et Hanwha)<br/>
             - Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)<br/>
             - Détection Intrusion (Vanderbilt SPC)</p>
+            <p>Chaque participant recevra un assortissement de délicieuses pralines Neuhaus.</p>
+            <img class="neuhaus imgBreakfast" src="../assets/neuhaus.png" alt="neuhaus pics"/>
         </div>
         <div class="flex">
             <div class="completeForm">
@@ -361,6 +363,10 @@ export default defineComponent({
 .large{
     font-size: large;
     font-weight: bold;
+}
+
+.imgBreakfast{
+    max-width: 100%;
 }
 
 @media (min-width: 900px) {
