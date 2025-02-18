@@ -1,34 +1,11 @@
 <template>
     <div>
         <CnTitle>
-            <h2>Petit déjeuner technique chez Cable & Network</h2>
+            <h2>Infrastructure Solution Day - Jeudi 15 mai 2025 </h2>
         </CnTitle>
-        <div class="phone infoPhone">
-            <p class="address large">Avenue Albert 1er, 14 à 4500 Huy</p>
-            <p class="large">Présentations Techniques sur :</p>
-            <p>- Fortinet (Firewall, Switch et AP Wi-Fi)<br/>
-            - Site Survey Wi-Fi avec Ekahau<br/>
-            - Vidéosurveillance (Milestone XProtect et Hanwha)<br/>
-            - Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)<br/>
-            - Détection Intrusion (Vanderbilt SPC)</p>
-            <p>Chaque participant recevra un assortissement de délicieuses pralines Neuhaus.</p>
-            <img class="neuhaus imgBreakfast" src="../assets/neuhaus.png" alt="neuhaus pics"/>
-        </div>
         <div class="flex">
             <div class="completeForm">
-                <form v-if="!saveDone" class="formGuest" v-on:submit.prevent="submitEventForm" novalidate>
-
-                    <div class="breakfastDiv">
-                        <p>Sélectionner la date du petit-déjeuner</p>
-                    <div class="breakfastDate">
-                        <label class="labelBreakfast" v-for="breakfast in breakfastList"
-                               :key="breakfast.getBreakfastId()">
-                            <input type="radio" :value="breakfast.getBreakfastId()" v-model="breakfastIdSelected"/>
-                            <span class="spanBreakfast">{{ breakfast.getDateFormatFrench() }}</span>
-                        </label>
-                    </div>
-                    </div>
-
+                <form v-if="!saveDone" class="formGuest" v-on:submit.prevent="submitEventForm" :novalidate="true">
                     <div class="mainGuest">
                         <label class="inputText">
                             <span>Nom</span>
@@ -54,7 +31,7 @@
                     <div class="nbGuest">
                         <p>Nombre de personnes vous accompagnant</p>
                         <div class="nbGuestChoice">
-                            <label class="labelRadio" v-for="index in 5" :key="index">
+                            <label class="labelRadio" v-for="index in 9" :key="index">
                                 <input type="radio" :value="index - 1" v-model="nbComeWith"/>
                                 <span class="spanRadio">{{ index - 1 }}</span>
                             </label>
@@ -78,36 +55,35 @@
                 </div>
             </div>
             <div class="fillInfo">
-                <img class="imgBreakfast" src="../assets/brekfast.jpg" alt="news_pic"/>
-                <p>Petit déjeuner avec viennoiseries, café, chocolat chaud, … </p>
-                <div class="infoDesktop">
-                    <p class="address">Avenue Albert 1er, 14 à 4500 Huy</p>
-                    <p class="infoMain">Présentations Techniques sur :</p>
-                    <p>- Fortinet (Firewall, Switch et AP Wi-Fi)<br/>
-                    - Site Survey Wi-Fi avec Ekahau<br/>
-                    - Vidéosurveillance (Milestone XProtect et Hanwha)<br/>
-                    - Contrôle d'Accès (Vanderbilt ACT, STid, Aperio et 2N)<br/>
-                    - Détection Intrusion (Vanderbilt SPC)</p>
-                </div>
-                <p>Chaque participant recevra un assortissement de délicieuses pralines Neuhaus.</p>
-                <img class="neuhaus imgBreakfast" src="../assets/neuhaus.png" alt="neuhaus pics"/>
+                <p><img class="iconInfra" src="/icons/calendar.svg" alt="calendar icon"/> Jeudi 15 mai 2025 -
+                    de
+                    10h à 18h</p>
+                <p><img class="iconInfra" src="/icons/placeholder.svg" alt="placeholder icon"/> Avenue Albert
+                    1er,
+                    14 - 4500 Huy</p>
+                <p><img class="iconInfra" src="/icons/dinner.svg" alt="dinner icon"/> Un buffet, une sélection de vins et un foodtruck café durant toute la journée</p>
+                <p>
+                    <img class="iconInfra" src="/icons/booth.svg" alt="booth icon"/>
+                    <span class="infoWithLink">
+                    Programme de la journée disponible sur
+                    <router-link class="programmeLink" :to="{name: 'programme'}">c-n.be/programme</router-link>
+                </span>
+                </p>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import CnTitle from "../components/commons/CnTitle.vue";
 import {defineComponent, ref} from "vue";
-import CnGuestAdd from "../components/CnGuestAdd.vue";
-import RegisterGuest from "../business/models/RegisterGuest";
 import validator from "validator";
-import axiosCn from "../axios/axiosCn";
-import Breakfast from "../business/models/Breakfast";
-
+import CnTitle from "../components/commons/CnTitle.vue";
+import RegisterGuest from "../business/models/RegisterGuest.ts";
+import CnGuestAdd from "../components/CnGuestAdd.vue";
+import axiosCn from "../axios/axiosCn.ts";
 export default defineComponent({
     components: {CnTitle, CnGuestAdd},
-    setup() {
+    setup(){
         const mainGuestName = ref('');
         const mainGuestFirstName = ref('');
         const mainGuestEmail = ref('');
@@ -118,23 +94,13 @@ export default defineComponent({
         const error = ref('');
         const onSend = ref(false);
         const saveDone = ref(false);
-        const breakfastIdSelected = ref('');
-
-
-        const breakfastList = ref(new Array<Breakfast>());
-
-        axiosCn.get('/api/breakfast').then(response => {
-            for (const breakfast of response.data) {
-                breakfastList.value.push(new Breakfast(breakfast.breakfastId, breakfast.dateISO, breakfast.dateFormatFrench))
-            }
-        });
 
 
         const emitGuest = (index: number, guest: RegisterGuest) => {
             guestsComeWith[index] = guest;
         };
 
-        const getGuest = (index: number) => {
+        const getGuest = (index: number): RegisterGuest | undefined => {
             if (index > guestsComeWith.length) {
                 return undefined;
             }
@@ -150,7 +116,6 @@ export default defineComponent({
                     email: mainGuestEmail.value
                 },
                 company: company.value,
-                breakfastId: breakfastIdSelected.value,
                 listGuests: reduceListGuest
             });
             if (response.status === 200) {
@@ -171,12 +136,6 @@ export default defineComponent({
             }
 
             if (nbComeWith.value > guestsComeWith.length) {
-                error.value = 'Veuillez compléter le formulaire';
-                onSend.value = false;
-                return;
-            }
-
-            if(!breakfastIdSelected.value){
                 error.value = 'Veuillez compléter le formulaire';
                 onSend.value = false;
                 return;
@@ -204,7 +163,7 @@ export default defineComponent({
             onSend.value = false;
         };
 
-        return {
+        return{
             mainGuestName,
             mainGuestFirstName,
             mainGuestEmail,
@@ -215,9 +174,7 @@ export default defineComponent({
             saveDone,
             emitGuest,
             getGuest,
-            submitEventForm,
-            breakfastList,
-            breakfastIdSelected
+            submitEventForm
         }
     }
 });
@@ -276,31 +233,9 @@ export default defineComponent({
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    cursor: pointer;
 }
 
 .formGuest .labelRadio input:checked ~ .spanRadio {
-    background-color: #FEFE00;
-}
-
-.formGuest .breakfastDate{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    column-gap: 5px;
-    margin-top: 10px;
-}
-
-.formGuest .spanBreakfast {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 1px 10px 1px;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.formGuest .labelBreakfast input:checked ~ .spanBreakfast {
     background-color: #FEFE00;
 }
 
@@ -345,44 +280,19 @@ export default defineComponent({
     display: none;
 }
 
-.infoPhone {
-    color: #2e3092;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 70px;
-}
-
-.infoPhone .address{
-    margin-bottom: 30px;
-}
-
-.infoPhone p {
-    margin-bottom: 20px;
-}
-
-.large{
-    font-size: large;
-    font-weight: bold;
-}
-
-.imgBreakfast{
-    max-width: 100%;
-}
-
 @media (min-width: 900px) {
-    .flex {
+    .flex{
         display: flex;
         justify-content: flex-start;
     }
 
-    .completeForm {
+    .completeForm{
         width: 50%;
     }
 
     .fillInfo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: block;
+        margin-left: 10px;
         margin-left: 100px;
         color: #2E3092;
     }
@@ -391,18 +301,13 @@ export default defineComponent({
         display: flex;
         align-items: center;
         margin-bottom: 20px;
-        margin-top: 20px;
     }
 
-    .fillInfo img {
-        width: 500px;
+    .fillInfo p img {
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
     }
-
-    .infoDesktop .address, .infoDesktop .infoMain {
-        font-weight: bold;
-    }
-
-
 }
 
 </style>

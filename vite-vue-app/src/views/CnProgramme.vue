@@ -8,7 +8,7 @@
                 <img src="../assets/brands/R&M.png" alt="R&M logo"/>
             </div>
             <p>Luc vous présente les solutions de R&M pour les Infrastructures passives au sein du camion
-                Roadshow R&M, ainsi que la nouvelle gamme de racks informatiques de R&M.</p>
+                Roadshow R&M, ainsi que la nouveauté: Câble Cat. 8.1.</p>
         </div>
 
         <div class="exhibiting">
@@ -20,31 +20,31 @@
                 lors de coupures de courant, ainsi que la gamme de PDUs intelligents.</p>
         </div>
 
-        <div class="exhibiting">
+<!--        <div class="exhibiting">
             <h3>Cisco - Switching, Wi-Fi & Firewall Enterprise</h3>
             <div class="logoExhibiting">
                 <img src="../assets/brands/cisco.png" alt="cisco logo"/>
             </div>
             <p>Pieter vous présente les solutions de Cisco pour le Switching, Wi-Fi et le Firewalling en Entreprise avec les gammes Small Business et Meraki.</p>
-        </div>
+        </div>-->
 
         <div class="exhibiting">
             <h3>Fortinet - Switching, Wi-Fi & Firewall Enterprise</h3>
             <div class="logoExhibiting">
                 <img src="../assets/brands/fortinet.png" alt="fortinet logo"/>
             </div>
-            <p>Bijan et Philippe vous présentent les solutions de Fortinet pour le Switching, le Wi-Fi et le Firewalling
+            <p>Laurent vous présente les solutions de Fortinet pour le Switching, le Wi-Fi et le Firewalling
                 en Entreprise.</p>
         </div>
 
-        <div class="exhibiting">
+<!--        <div class="exhibiting">
             <h3>Phoenix Contact - Switching & Alimentations Industriels</h3>
             <div class="logoExhibiting">
                 <img src="../assets/brands/phoenix_contact.png" alt="phoenix logo"/>
             </div>
             <p>Romain vous présente les solutions de Phoenix Contact pour le switching industriel, ainsi que les
                 alimentations électriques industrielles.</p>
-        </div>
+        </div>-->
 
         <div class="exhibiting">
             <h3>Bemac - Sécurité et Détection Incendie</h3>
@@ -66,16 +66,34 @@
         </div>
 
         <div class="exhibiting">
-            <h3>Sécurité Physique des Infrastructure</h3>
-            <div class="logosExhibiting">
+            <h3>Vidéosurveillance</h3>
+            <div class="logoExhibiting">
                 <img src="../assets/brands/hanwha.png" alt="hanwha logo"/>
-                <img src="../assets/brands/milestone.png" alt="milestone logo"/>
+            </div>
+            <p>
+                Luk vous présente les caméras Hanwha, ainsi que le VMS Wave. Venez découvrir ses caméras spécialisées dans la surveillance des espaces ouverts.
+            </p>
+        </div>
+
+        <div class="exhibiting">
+            <h3>Contrôle d'accès</h3>
+            <div class="logosExhibiting">
                 <img src="../assets/brands/vanderbilt.png" alt="vanderbilt logo"/>
                 <img src="../assets/brands/2N.png" alt="2N logo"/>
+                <img src="../assets/brands/stid.png" alt="stid logo"/>
             </div>
-            <p>Bruno vous présente les solutions permettant d'assurer la sécurité physique de vos bâtiments.
-                Cela comprend la vidéosurveillance avec Hanwha et Milestone XProtect, le contrôle d'accès avec
-                Vanderbilt et la vidéophonie avec 2N.
+            <p>Maarten vous présente nos solutions de contrôle d'accès avec Vanderbilt, Genetec et Stid. Il vous présente également les parlophones 2N.
+                Venez découvrir notre atelier dédicacé à la sécurité des badges d'accès.
+            </p>
+        </div>
+
+        <div class="exhibiting">
+            <h3>Détection - Intrusion</h3>
+            <div class="logoExhibiting">
+                <img src="../assets/brands/vanderbilt.png" alt="vanderbilt logo"/>
+            </div>
+            <p>Nicolas vous présente nos solutions axées sur la détection - intrusion. Cette nouvelle gamme de solutions vient compléter
+                notre offre de sécurité physique des infrastructures chez Cable & Network.
             </p>
         </div>
 
@@ -144,6 +162,7 @@ h3 {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
     margin-top: 20px;
 }

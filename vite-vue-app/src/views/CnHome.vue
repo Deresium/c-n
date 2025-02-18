@@ -30,6 +30,31 @@
         </div>
 
         <div class="cnMain">
+            <div class="inCover">
+                <h3 class="phone">A la une</h3>
+                <img src="../assets/invitation_day.png" alt="news_pic"/>
+                <div class="inCoverContent">
+                    <h3 class="desktop">A la une</h3>
+                    <h4>Infrastructure Solution Day - Jeudi 15 mai 2025</h4>
+                    <div class="infraDayInfo">
+                        <p><img class="iconInfra" src="/icons/calendar.svg" alt="calendar icon"/>Jeudi 15 mai 2025 - de 10h à 18h</p>
+                        <p><img class="iconInfra" src="/icons/placeholder.svg" alt="placeholder icon"/> Avenue Albert 1er, 14 - 4500 Huy</p>
+                        <p><img class="iconInfra" src="/icons/dinner.svg" alt="dinner icon"/> Un buffet, une sélection de vins et un foodtruck café durant toute la journée</p>
+                        <p>
+                            <img class="iconInfra" src="/icons/booth.svg" alt="booth icon"/>
+                            <span class="infoWithLink">
+                            Programme de la journée disponible sur
+                            <router-link class="programmeLink" :to="{name: 'programme'}">c-n.be/programme</router-link>
+                        </span>
+                        </p>
+                        <p><img class="iconInfra" src="/icons/new_2.svg" alt="new icon"/>Nouveauté 2025 - Contrôle d'accès : Atelier Hacking et Système offline d'Assa Abloy</p>
+                        <p>
+                            <router-link class="inscriptionLink" :to="{name: 'inscription'}">S'inscrire</router-link>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div class="divFour divServices">
                 <h3>Solutions</h3>
                 <div class="mainFour mainServices">
@@ -420,7 +445,7 @@ div.divPartners {
     .inCover > img {
         width: 20%;
         margin-left: 0;
-        object-fit: cover;
+        object-fit: contain;
 
     }
 

@@ -18,8 +18,12 @@ class GuestFacade {
     addGuests(ownerGuest) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.guestDataGateway.addGuests(ownerGuest);
-            const breakfast = yield this.breakfastRequester.getBreakfast(ownerGuest.getBreakfastId());
-            yield this.sendMailDataGateway.sendMailGuest(ownerGuest, breakfast.getDateFormatFrench());
+            let date = null;
+            if (ownerGuest.getBreakfastId()) {
+                const breakfast = yield this.breakfastRequester.getBreakfast(ownerGuest.getBreakfastId());
+                date = breakfast.getDateFormatFrench();
+            }
+            yield this.sendMailDataGateway.sendMailGuest(ownerGuest, date);
         });
     }
 }

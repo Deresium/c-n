@@ -58,7 +58,7 @@ export default class SendMailSESDataMapper implements ISendMailDataGateway {
         const command = new SendEmailCommand({
             Message: {
                 Subject: {
-                    Data: `Confirmation d'invitation petit-déjeuner de ${guest.getMainGuestFirstName()} ${guest.getMainGuestName()}`,
+                    Data: `Confirmation d'invitation "Infrastructure Solution Day" de ${guest.getMainGuestFirstName()} ${guest.getMainGuestName()}`,
                 },
                 Body: {
                     Html: {
@@ -90,7 +90,7 @@ export default class SendMailSESDataMapper implements ISendMailDataGateway {
         }
 
         let text = `
-        Confirmation d'invitation de ${guest.getMainGuestName()} ${guest.getMainGuestFirstName()} (${guest.getMainGuestEmail()}) de la société ${guest.getCompany()} pour le petit-déjeuner du ${breakfastFrenchDate} ${separator}
+        Confirmation d'invitation de ${guest.getMainGuestName()} ${guest.getMainGuestFirstName()} (${guest.getMainGuestEmail()}) de la société ${guest.getCompany()} pour l'Infrastructure Solution Day du 15 mai 2025 ${separator}
         Invités supplémentaires: ${guest.getGuests().length} ${separator}
         `;
 

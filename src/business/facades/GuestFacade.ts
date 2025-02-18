@@ -16,8 +16,12 @@ export default class GuestFacade implements IGuestDataGateway {
     }
     async addGuests(ownerGuest: OwnerGuestDS): Promise<void> {
         await this.guestDataGateway.addGuests(ownerGuest);
-        const breakfast = await this.breakfastRequester.getBreakfast(ownerGuest.getBreakfastId());
-        await this.sendMailDataGateway.sendMailGuest(ownerGuest, breakfast.getDateFormatFrench());
+        let date = null;
+        if(ownerGuest.getBreakfastId()) {
+            const breakfast = await this.breakfastRequester.getBreakfast(ownerGuest.getBreakfastId());
+            date = breakfast.getDateFormatFrench();
+        }
+        await this.sendMailDataGateway.sendMailGuest(ownerGuest, date);
     }
 
 }
