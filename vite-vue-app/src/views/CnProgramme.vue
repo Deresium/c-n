@@ -1,7 +1,9 @@
 <template>
     <CnTitle><h2>IT Infrastructure Solution Day - Programme</h2></CnTitle>
+    <div class="inscriptionDiv">
+        <router-link class="inscriptionLink" :to="{name: 'inscription'}">S'inscrire</router-link>
+    </div>
     <div class="exhibitingList">
-
         <div class="exhibiting">
             <h3>R&M - Solutions pour Infrastructures Passives</h3>
             <div class="logoExhibiting">
@@ -20,13 +22,13 @@
                 lors de coupures de courant, ainsi que la gamme de PDUs intelligents.</p>
         </div>
 
-<!--        <div class="exhibiting">
-            <h3>Cisco - Switching, Wi-Fi & Firewall Enterprise</h3>
-            <div class="logoExhibiting">
-                <img src="../assets/brands/cisco.png" alt="cisco logo"/>
-            </div>
-            <p>Pieter vous présente les solutions de Cisco pour le Switching, Wi-Fi et le Firewalling en Entreprise avec les gammes Small Business et Meraki.</p>
-        </div>-->
+        <!--        <div class="exhibiting">
+                    <h3>Cisco - Switching, Wi-Fi & Firewall Enterprise</h3>
+                    <div class="logoExhibiting">
+                        <img src="../assets/brands/cisco.png" alt="cisco logo"/>
+                    </div>
+                    <p>Pieter vous présente les solutions de Cisco pour le Switching, Wi-Fi et le Firewalling en Entreprise avec les gammes Small Business et Meraki.</p>
+                </div>-->
 
         <div class="exhibiting">
             <h3>Fortinet - Switching, Wi-Fi & Firewall Enterprise</h3>
@@ -37,14 +39,14 @@
                 en Entreprise.</p>
         </div>
 
-<!--        <div class="exhibiting">
-            <h3>Phoenix Contact - Switching & Alimentations Industriels</h3>
-            <div class="logoExhibiting">
-                <img src="../assets/brands/phoenix_contact.png" alt="phoenix logo"/>
-            </div>
-            <p>Romain vous présente les solutions de Phoenix Contact pour le switching industriel, ainsi que les
-                alimentations électriques industrielles.</p>
-        </div>-->
+        <!--        <div class="exhibiting">
+                    <h3>Phoenix Contact - Switching & Alimentations Industriels</h3>
+                    <div class="logoExhibiting">
+                        <img src="../assets/brands/phoenix_contact.png" alt="phoenix logo"/>
+                    </div>
+                    <p>Romain vous présente les solutions de Phoenix Contact pour le switching industriel, ainsi que les
+                        alimentations électriques industrielles.</p>
+                </div>-->
 
         <div class="exhibiting">
             <h3>Bemac - Sécurité et Détection Incendie</h3>
@@ -52,7 +54,8 @@
                 <img src="../assets/brands/bemac-logo.png" alt="bemac logo"/>
             </div>
             <p>
-                Laurent et Henry vous présentent les solutions de Bemac pour la sécurité et la détection incendie, avec notamment leurs centraux DIANA
+                Laurent et Henry vous présentent les solutions de Bemac pour la sécurité et la détection incendie, avec
+                notamment leurs centraux DIANA
             </p>
         </div>
 
@@ -71,7 +74,8 @@
                 <img src="../assets/brands/hanwha.png" alt="hanwha logo"/>
             </div>
             <p>
-                Luk vous présente les caméras Hanwha, ainsi que le VMS Wave. Venez découvrir ses caméras spécialisées dans la surveillance des espaces ouverts.
+                Luk vous présente les caméras Hanwha, ainsi que le VMS Wave. Venez découvrir ses caméras spécialisées
+                dans la surveillance des espaces ouverts.
             </p>
         </div>
 
@@ -82,7 +86,8 @@
                 <img src="../assets/brands/2N.png" alt="2N logo"/>
                 <img src="../assets/brands/stid.png" alt="stid logo"/>
             </div>
-            <p>Maarten vous présente nos solutions de contrôle d'accès avec Vanderbilt, Genetec et Stid. Il vous présente également les parlophones 2N.
+            <p>Maarten vous présente nos solutions de contrôle d'accès avec Vanderbilt, Genetec et Stid. Il vous
+                présente également les parlophones 2N.
                 Venez découvrir notre atelier dédicacé à la sécurité des badges d'accès.
             </p>
         </div>
@@ -92,20 +97,12 @@
             <div class="logoExhibiting">
                 <img src="../assets/brands/vanderbilt.png" alt="vanderbilt logo"/>
             </div>
-            <p>Nicolas vous présente nos solutions axées sur la détection - intrusion. Cette nouvelle gamme de solutions vient compléter
+            <p>Nicolas vous présente nos solutions axées sur la détection - intrusion. Cette nouvelle gamme de solutions
+                vient compléter
                 notre offre de sécurité physique des infrastructures chez Cable & Network.
             </p>
         </div>
 
-        <div class="exhibiting">
-            <h3>Fibre Optique Soufflée</h3>
-            <div class="logoExhibiting fullPic">
-                <img src="../assets/fibre_optique.png" alt="fibre optique"/>
-            </div>
-            <p>Frédéric réalise des démonstrations de fibres soufflées, une technique permettant le passage
-                des brins de fibres dans des microducts.
-            </p>
-        </div>
 
         <div class="exhibiting">
             <h3>Gestion et Sécurité Physique des racks informatiques</h3>
@@ -123,6 +120,10 @@
                 ► Cordons électriques sécurisés de Zonit
             </p>
         </div>
+    </div>
+
+    <div class="inscriptionDiv">
+        <router-link class="inscriptionLink" :to="{name: 'inscription'}">S'inscrire</router-link>
     </div>
 
 </template>
@@ -147,7 +148,7 @@ export default defineComponent({
     margin-bottom: 100px;
 }
 
-.exhibiting{
+.exhibiting {
     color: #2E3092;
     display: flex;
     flex-direction: column;
@@ -167,7 +168,7 @@ h3 {
     margin-top: 20px;
 }
 
-.fullPic{
+.fullPic {
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -176,18 +177,33 @@ h3 {
     width: 70px;
 }
 
-.exhibiting img{
+.exhibiting img {
     width: 200px;
 }
 
-@media(min-width: 900px) {
-    .exhibitingList{
+.inscriptionDiv {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.inscriptionLink {
+    display: block;
+    background-color: #2e3092;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+@media (min-width: 900px) {
+    .exhibitingList {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-evenly;
     }
 
-    .exhibiting{
+    .exhibiting {
         width: 40%;
     }
 }
